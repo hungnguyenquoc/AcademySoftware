@@ -9,7 +9,7 @@ using Academy.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-
+using AutoMapper;
 namespace Academy.API.Controllers
 {
     [Route("api/[controller]")]
@@ -18,9 +18,11 @@ namespace Academy.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _config = config;
             _repo = repo;
         }
@@ -32,12 +34,12 @@ namespace Academy.API.Controllers
             {
                 return BadRequest("Username already exists");
             }
-            var userToCreated = new User
-            {
-                Username = userForRegisterDto.Username
-            };
+            var userToCreated = _mapper.Map<User>(userForRegisterDto);
+            
             var createdUser = await _repo.Register(userToCreated, userForRegisterDto.Password);
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
+
+            return CreatedAtRoute("GetUser", new {controller = "Users", id = createdUser.Id}, userToReturn);
         }
         // Controller Login
         [HttpPost("login")]

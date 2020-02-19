@@ -10,18 +10,17 @@ import { UserService } from '../../../_services/user.service';
   styleUrls: ['./admin-teacher.component.css']
 })
 export class AdminTeacherComponent implements OnInit {
-  users: User[];
-  constructor(private userService: UserService, private toastr: ToastrService ) { }
+  values: any;
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.getValues();
   }
-  loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
+  getValues() {
+    this.http.get('http://localhost:5000/api/values').subscribe(response => {
+      this.values = response;
     }, error => {
-      this.toastr.error(error);
+      console.log(error);
     });
   }
-
 }

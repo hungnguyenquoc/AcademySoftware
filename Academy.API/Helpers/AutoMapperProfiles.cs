@@ -24,6 +24,9 @@ namespace Academy.API.Helpers
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
             CreateMap<Photo, PhotosForDetailedDto>();
+            CreateMap<UserForRegisterDto, User>();
+            CreateMap<CourseCategoryForAddDto, CourseCategory>();
+
             // CreateMap<UserForUpdateDto, User>();
             //CreateMap<Photo, PhotoForReturnDto>();
             //CreateMap<PhotoForCreationDto, Photo>();

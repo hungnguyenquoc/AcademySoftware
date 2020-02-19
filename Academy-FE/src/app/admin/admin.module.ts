@@ -30,7 +30,7 @@ import { UserService } from '../_services/user.service';
 import { ErrorInterceptorProvider } from '../_services/error.interceptor';
 import { HttpClientModule } from '@angular/common/http';
 
-export function tokenGetter() {
+export function tokenGetters() {
   return localStorage.getItem('tokenString');
 }
 @ NgModule({
@@ -52,11 +52,10 @@ export function tokenGetter() {
     TabsModule.forRoot(),
     RouterModule,
     ToastrModule,
-    HttpClientModule,
+    // HttpClientModule,
     JwtModule.forRoot({
       config: {
-          tokenGetter,
-        //   tokenGetter: tokenGetter,
+          tokenGetter: tokenGetters,
           whitelistedDomains: ['localhost:5000'],
           blacklistedRoutes: ['localhost:5000/api/auth']
       }

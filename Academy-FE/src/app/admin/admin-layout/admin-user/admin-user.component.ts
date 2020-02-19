@@ -3,7 +3,7 @@ import { User } from '../../../_models/user';
 import { UserService } from '../../../_services/user.service';
 import { ToastrService} from 'ngx-toastr';
 
-@Component({
+@ Component({
   selector: 'app-admin-user',
   templateUrl: './admin-user.component.html',
   styleUrls: ['./admin-user.component.css']

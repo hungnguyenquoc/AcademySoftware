@@ -1,0 +1,45 @@
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên tài khoản</th>
+        <th>Họ tên</th>
+        <th>Ngày đăng ký</th>
+        <th>Quyền</th>
+        <th>Tình trạng</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let item of usersList; let i = index">
+        <td> {{ i + 1}} </td>
+        <td> {{ item.fullName}}</td>
+        <td> {{ item.lastName}}</td>
+        <!-- <td> {{ item.lastname}}</td> -->
+        <!-- <td> {{ item.username }}</td>
+        
+        <td> {{ item.email}}</td>
+        <td> {{ item.phone}}</td>
+        <td> {{ item.country}}</td>
+        <td> {{ item.gender}}</td> -->
+        <!-- <td>Học viên</td>
+        <td>
+          <span class="badge badge-success">Active</span>
+        </td>
+        <td>
+          <a href="" class="mr-2">
+            <i class="fa fa-eye font-weight-200" aria-hidden="true"
+              style="color: blue; font-size: 1.2em; font-weight: bold"></i>
+          </a>
+          <a href="" class="mr-2">
+            <i class="fa fa-pencil-square-o font-weight-200" aria-hidden="true"
+              style="color: green; font-size: 1.2em"></i>
+          </a>
+          <a href="">
+            <i class="fa fa-trash mr-2 font-weight-200" aria-hidden="true"
+              style="color: red; font-size: 1.2em"></i>
+          </a>
+        </td>-->
+      </tr>
+    </tbody>
+  </table>

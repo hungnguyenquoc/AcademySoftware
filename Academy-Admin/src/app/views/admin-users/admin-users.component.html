@@ -1,0 +1,59 @@
+<div class="mt-5">
+  <div class="col-md-12">
+    <div class="card card-wrapper">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Quản lý tài khoản</h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <button class="btn btn-success" data-toggle="modal" data-target="#addNewModal">
+              <i class="fa fa-plus"></i>
+              Thêm tài khoản
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+            <app-admin-user-list></app-admin-user-list>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- modal add new record -->
+<div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tạo tài khoản</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-admin-user-add></app-admin-user-add>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-12 col-12 col-md-4 form-group">
+    <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+  </div>
+  <div class="col-xs-12 col-12 col-md-4 form-group">
+    <input type="text" placeholder="Daterangepicker" class="form-control" bsDaterangepicker>
+  </div>
+</div>
+Swal.fire(
+'Good job!',
+'You clicked the button!',
+'success'
+)

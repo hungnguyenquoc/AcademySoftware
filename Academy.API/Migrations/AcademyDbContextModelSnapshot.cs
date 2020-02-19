@@ -322,6 +322,10 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
                     b.Property<string>("Gender");
 
                     b.Property<string>("Interests");
@@ -332,11 +336,15 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTime>("LastActive");
 
+                    b.Property<string>("LastName");
+
                     b.Property<string>("LookingFor");
 
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
+
+                    b.Property<string>("Phone");
 
                     b.Property<string>("Username");
 

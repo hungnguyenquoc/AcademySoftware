@@ -22,13 +22,16 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { ClientComponent } from './client/client.component';
+import { CoreModule } from './core/core.module';
 
-export function tokenGetter() {
+export function tokenGetters() {
   return localStorage.getItem('tokenString');
 }
 @ NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ export function tokenGetter() {
     HomeModule,
     AdminModule,
     MemberModule,
+    CoreModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     BsDatepickerModule.forRoot(),
@@ -45,8 +49,8 @@ export function tokenGetter() {
     MatButtonModule,
     JwtModule.forRoot({
       config: {
-          tokenGetter,
-        //   tokenGetter: tokenGetter,
+          // tokenGetter,
+          tokenGetter: tokenGetters,
           whitelistedDomains: ['localhost:5000'],
           blacklistedRoutes: ['localhost:5000/api/auth']
       }
@@ -57,7 +61,8 @@ export function tokenGetter() {
     AuthService,
     AuthGuard,
     UserService,
-    ErrorInterceptorProvider
+    // AuthenticationInterceptor,
+    // E?rrorInterceptorProvider
   ],
   bootstrap: [AppComponent],
 })

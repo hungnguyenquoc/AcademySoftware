@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, HostBinding, HostListener } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { WINDOW } from '../../../shared/helpers/window.helper';
+// import { WINDOW } from '../../../shared/helpers/window.helper';
 
 @ Component({
   selector: 'app-home-layout-header',

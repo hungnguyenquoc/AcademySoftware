@@ -19,6 +19,10 @@ namespace Academy.API.Dtos
         public string LookingFor { get; set; }
         public string Interests { get; set; }
 
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
         public ICollection<PhotosForDetailedDto> Photos {get;set;}
     }
 }

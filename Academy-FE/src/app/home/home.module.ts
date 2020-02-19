@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService} from '../_services/auth.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from '../_guards/auth.guard';
+import { ErrorInterceptorProvider } from '../_services/error.interceptor';
 
 @ NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AuthGuard } from '../_guards/auth.guard';
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    ErrorInterceptorProvider
   ]
 })
 export class HomeModule { }

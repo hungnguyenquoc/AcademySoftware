@@ -1,93 +1,102 @@
-<header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">
-      <img class="navbar-brand-full" src="img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-      <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
-    </a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="nav navbar-nav d-md-down-none">
-      <li class="nav-item px-3">
-        <a class="nav-link" href="#">Dashboard</a>
-      </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="#">Users</a>
-      </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="#">Settings</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav ml-auto">
-      <li class="nav-item d-md-down-none">
-        <a class="nav-link" href="#">
-          <i class="icon-bell"></i>
-          <span class="badge badge-pill badge-danger">5</span>
-        </a>
-      </li>
-      <li class="nav-item d-md-down-none">
-        <a class="nav-link" href="#">
-          <i class="icon-list"></i>
-        </a>
-      </li>
-      <li class="nav-item d-md-down-none">
-        <a class="nav-link" href="#">
-          <i class="icon-location-pin"></i>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
-        </a>
-        <div class="dropdown-menu dropdown-menu-right">
-          <div class="dropdown-header text-center">
-            <strong>Account</strong>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-header">
+                <i class="fa fa-align-justify"></i> Striped Table
+              </div>
+              <div class="card-body">
+                <table class="table table-responsive-sm table-striped">
+                  <thead>
+                    <tr>
+                      <th>Username</th>
+                      <th>Date registered</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Yiorgos Avraamu</td>
+                      <td>2012/01/01</td>
+                      <td>Member</td>
+                      <td>
+                        <span class="badge badge-success">Active</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Avram Tarasios</td>
+                      <td>2012/02/01</td>
+                      <td>Staff</td>
+                      <td>
+                        <span class="badge badge-danger">Banned</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Quintin Ed</td>
+                      <td>2012/02/01</td>
+                      <td>Admin</td>
+                      <td>
+                        <span class="badge badge-secondary">Inactive</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Enéas Kwadwo</td>
+                      <td>2012/03/01</td>
+                      <td>Member</td>
+                      <td>
+                        <span class="badge badge-warning">Pending</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Agapetus Tadeáš</td>
+                      <td>2012/01/21</td>
+                      <td>Staff</td>
+                      <td>
+                        <span class="badge badge-success">Active</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#">Prev</a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">4</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-bell-o"></i> Updates
-            <span class="badge badge-info">42</span>
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-envelope-o"></i> Messages
-            <span class="badge badge-success">42</span>
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-tasks"></i> Tasks
-            <span class="badge badge-danger">42</span>
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-comments"></i> Comments
-            <span class="badge badge-warning">42</span>
-          </a>
-          <div class="dropdown-header text-center">
-            <strong>Settings</strong>
-          </div>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-user"></i> Profile</a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-wrench"></i> Settings</a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-usd"></i> Payments
-            <span class="badge badge-secondary">42</span>
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-file"></i> Projects
-            <span class="badge badge-primary">42</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-shield"></i> Lock Account</a>
-          <a class="dropdown-item" href="#">
-            <i class="fa fa-lock"></i> Logout</a>
-        </div>
-      </li>
-    </ul>
-    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </header>
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
