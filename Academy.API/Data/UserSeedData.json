@@ -1,0 +1,29 @@
+[
+  {
+    "Fullname":"Nguyễn Văn Trường",
+    "Gender":"Nam",
+    "DateOfBirth":"1994-02-21",
+    "Password":"Hung123456",
+    "MobilePhone":"123456789",
+    "Address":"abc cmt8",
+    "Description":"abcdefe"
+  },
+  {
+    "Fullname":"Nguyễn Văn Sơn",
+    "Gender":"Nam",
+    "DateOfBirth":"1994-02-21",
+    "Password":"Hung123456",
+    "MobilePhone":"123456789",
+    "Address":"abc cmt8",
+    "Description":"abcdefe"
+  },
+  {
+    "Fullname":"Nguyễn Văn Sơn",
+    "Gender":"Nam",
+    "DateOfBirth":"1994-02-21",
+    "Password":"Hung123456",
+    "MobilePhone":"123456789",
+    "Address":"abc cmt8",
+    "Description":"abcdefe"
+  }
+]

@@ -1,0 +1,128 @@
+<!-- <div class="mt-5">
+  <div class="col-md-12">
+    <div class="card card-wrapper">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Quản lý danh mục khóa học</h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <button class="btn btn-success" data-toggle="modal" data-target="#addNewModal">
+              <i class="fa fa-plus"></i>
+              Thêm danh mục
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Tên</th>
+              <th>Mô tả</th>
+              <th>Trạng thái</th>
+              <th>Tùy chọn</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of listCourseCategory; let i = index">
+            <tr>
+              <td> {{ i + 1}} </td>
+              <td> {{ item.cate_Name}}</td>
+              <td> {{ item.cate_Description}}</td>
+              <td>
+                <span *ngIf="item.status == 1; else Nu" class="badge badge-success">Kích hoạt</span>
+                <ng-template #Nu>
+                  <span class="badge badge-danger">Chưa kích hoạt</span>
+                </ng-template>
+              </td>
+              <td>
+                <a href="" class="mr-2">
+                  <i class="fa fa-eye font-weight-200" aria-hidden="true"
+                    style="color: blue; font-size: 1.2em; font-weight: bold"></i>
+                </a>
+                <a href="" class="mr-2">
+                  <i class="fa fa-pencil-square-o font-weight-200" aria-hidden="true"
+                    style="color: green; font-size: 1.2em"></i>
+                </a>
+                <a href="">
+                  <i class="fa fa-trash mr-2 font-weight-200" aria-hidden="true"
+                    style="color: red; font-size: 1.2em"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button class="btn btn-success" [swal]="['Oops!', 'This is not implemented yet :/', 'warning']">
+          Do it!
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<!-- begin modal add new record -->
+<!--  -->
+<!-- <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tạo tài khoản</h5>
+        <button type="reset" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addForm" (ngSubmit)="createSubmitForm()" class="form-horizontal">
+          <div class="form-group">
+            <label for="my-input">Tên danh mục</label>
+            <input [ngClass]="{'is-invalid': addForm.get('cate_Name').errors && addForm.get('cate_Name').touched}"
+              class="form-control" placeholder="Họ" formControlName="cate_Name">
+            <div class="invalid-feedback" *ngIf="addForm.get('cate_Name').touched 
+                && addForm.get('cate_Name').hasError('required')">
+              Vui lòng nhập tên danh mục
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="my-input">Alias</label>
+            <input [ngClass]="{'is-invalid': addForm.get('cate_Alias').errors && addForm.get('cate_Alias').touched}"
+              class="form-control" placeholder="Alias" formControlName="cate_Alias">
+            <div class="invalid-feedback" *ngIf="addForm.get('cate_Alias').touched 
+                  && addForm.get('cate_Alias').hasError('required')">Vui lòng nhập Alias</div>
+          </div>
+          <div class="form-group">
+            <label for="my-input">Mô tả</label>
+            <input
+              [ngClass]="{'is-invalid': addForm.get('cate_Description').errors && addForm.get('cate_Description').touched}"
+              class="form-control" placeholder="Nhập mô tả" formControlName="cate_Description">
+            <div class="invalid-feedback" *ngIf="addForm.get('cate_Description').touched 
+                && addForm.get('cate_Description').hasError('required')">Vui lòng nhập mô tả</div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="status"> Kích hoạt
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <button class="btn btn-sm btn-primary" type="submit">
+              <i class="fa fa-dot-circle-o"></i> Đăng ký</button>
+            <button class="btn btn-sm btn-danger" type="reset">
+              <i class="fa fa-ban"></i> Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!--  -->
+<!-- end modal add new record  -->
