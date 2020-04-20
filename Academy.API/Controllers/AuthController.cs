@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Web;
+using Microsoft.Extensions.Options;
 
 namespace Academy.API.Controllers
 {
@@ -28,17 +30,24 @@ namespace Academy.API.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
+        private readonly IOptions<EmailOptionsDto> _emailOptions;
+        private readonly IEmail _email;
 
         public AuthController(IConfiguration config, 
                             IMapper mapper, 
                             UserManager<User> userManager,
                             SignInManager<User> signInManager,
-                            RoleManager<Role> roleManager)
+                            RoleManager<Role> roleManager,
+                            IOptions<EmailOptionsDto> emailOptions,
+                            IEmail email)
         {
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _emailOptions = emailOptions;
+            _email = email;
+            _emailOptions = emailOptions;
             _config = config;
         }
         // Controller Register
@@ -49,24 +58,80 @@ namespace Academy.API.Controllers
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+             //Send Email
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(userToCreate);
+            var confirmEmailUrl = Request.Headers["confirmEmailUrl"];//http://localhost:4200/email-confirm
+
+            var uriBuilder = new UriBuilder(confirmEmailUrl);
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["token"] = token;
+            
+            query["userid"] = userToCreate.Id.ToString();
+            uriBuilder.Query = query.ToString();
+            var urlString = uriBuilder.ToString();
+
+            var emailBody = $"Please confirm your email by clicking on the link below </br>{urlString}";
+            await _email.Send(userForRegisterDto.Email, emailBody, _emailOptions.Value);
+
+            //
             if(result.Succeeded) {
                 // result =await _userManager.AddToRoleAsync(userToCreate.Id,userForRegisterDto.RoleName);
                 return CreatedAtRoute("GetUser", new {controller = "Users", id = userToCreate.Id}, userToReturn);         
             }
             return BadRequest(result.Errors);
-            // if(await _repo.UserExists(userForRegisterDto.Username))
-            // {
-            //     return BadRequest("Username already exists");
-            // }
-            // var userToCreated = _mapper.Map<User>(userForRegisterDto);
-            
-            // var createdUser = await _repo.Register(userToCreated, userForRegisterDto.Password);
-            // var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
-
-            // return CreatedAtRoute("GetUser", new {controller = "Users", id = createdUser.Id}, userToReturn);
+                
         }
-        // Controller Reset Password
+        // Controller ConfirmEmail
+        [HttpPost("confirmemail")]
+        public async Task<IActionResult> ConfirmEmail(UserForConfirmEmailDto userForConfirmEmailDto)
+        {
+            var user = await _userManager.FindByIdAsync(userForConfirmEmailDto.UserId);
+            var confirm = await _userManager.ConfirmEmailAsync(user, Uri.UnescapeDataString(userForConfirmEmailDto.Token));
+            if(confirm.Succeeded) 
+            {
+                return Ok();
+            }
+            return Unauthorized();
+        }
 
+        // Controller Reset Password
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword(UserForResetPasswordDto userForReset)
+        {
+            var user = await _userManager.FindByEmailAsync(userForReset.Email);
+            
+            if(user != null || user.EmailConfirmed)
+            {
+                // Send Email
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var changePasswordUrl = Request.Headers["changePasswordUrl"]; //http://localhost:4200/changepasswordUrl
+                var uriBuilder = new UriBuilder(changePasswordUrl);
+                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                query["token"] = token;
+                query["userid"] = user.Id.ToString();
+                uriBuilder.Query = query.ToString();
+                var urlString = uriBuilder.ToString();
+
+                var emailBody = $"Click on link to change password </br> {urlString}";
+                await _email.Send(userForReset.Email, emailBody, _emailOptions.Value);
+
+                return Ok();
+            }
+            return Unauthorized();
+        }
+        // Controller Change Password
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword(UserForChangePasswordDto userForChange)
+        {
+            var user = await _userManager.FindByIdAsync(userForChange.UserId);
+            var resetPasswordResult = await _userManager.ResetPasswordAsync(user, Uri.UnescapeDataString(userForChange.Token), userForChange.Password);
+
+            if(resetPasswordResult.Succeeded)
+            {
+                return Ok();
+            }
+            return Unauthorized();
+        }
         // Controller Login
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
@@ -75,7 +140,7 @@ namespace Academy.API.Controllers
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, true);
                 
-
+            
             if (result.Succeeded)
             {
                 var appUser = await _userManager.Users

@@ -1,0 +1,22 @@
+<header id="home-header" [ngClass]="{'header-fixed': isFixed}">
+  <div class="container" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div class="header-mobile-top" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div class="home-logo mr-1">
+          <!-- <a href="/"><img src="assets/images/logo-full.png" alt="Egret logo"></a> -->
+          <a href="/"><img src="../../../../assets/imagesForClient/logo.png" style="width: 150px; height: auto;" alt="Egret logo"></a>
+
+      </div>
+      <button mat-icon-button id="menu-toggle" (click)="toggleMenu()"><mat-icon>menu</mat-icon></button>
+    </div>
+    <div fxFlex class="top-menu">
+      <button mat-button id="dashboard-topbtn" class="hometop-btn"><strong>Trang chủ</strong></button>
+      <button mat-button id="dashboard-topbtn" class="hometop-btn" scrollTo="portfolio-section"><strong>Lịch khai giảng</strong></button>
+      <button mat-button id="dashboard-topbtn" class="hometop-btn" scrollTo="service-section"><strong>Chương trình đào tạo</strong></button>
+      <button mat-button id="dashboard-topbtn" class="hometop-btn" scrollTo="testimonials-section"><strong>Tra cứu</strong></button>
+      <button mat-button id="dashboard-topbtn" class="hometop-btn" scrollTo="pricings-section"><strong>Tuyển dụng</strong></button>
+      <button mat-button id="dashboard-topbtn" class="hometop-btn" scrollTo="contact-section"><strong>Liên hệ</strong></button>
+      <span fxFlex></span>
+      <button mat-button id="dashboard-topbtn" class="hometop-btn icon-button"><mat-icon>person</mat-icon><strong>Đăng nhập</strong></button>
+    </div>
+  </div>
+</header>

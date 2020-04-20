@@ -11,6 +11,13 @@ import { RegisterComponent } from './views/register/register.component';
 import { AdminUsersComponent } from './views/admin-users/admin-users.component';
 import { AdminCoursesComponent } from './views/admin-courses/admin-courses.component';
 import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
+import { ConfirmEmailComponent } from './views/confirm-email/confirm-email.component';
+import { AdminMajorComponent } from './views/admin-major/admin-major.component';
+import { AdminProgramStudyComponent } from './views/admin-program-study/admin-program-study.component';
+import { AdminProgramsComponent } from './views/admin-programs/admin-programs.component';
+import { AdminTemplateComponent } from './views/admin-template/admin-template.component';
+import { AdminCourseDetailComponent } from './views/admin-courses/admin-course-detail/admin-course-detail.component';
+import { AdminCourseUpdateComponent } from './views/admin-courses/admin-course-update/admin-course-update.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +28,10 @@ export const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent
+  },
+  {
+    path: 'confirm-email',
+    component: ConfirmEmailComponent
   },
   {
     path: '404',
@@ -73,13 +84,48 @@ export const routes: Routes = [
         path: 'admin-users',
         component: AdminUsersComponent
       },
+      // Bắt đầu Routing của phần quản lý khóa học
       {
         path: 'admin-courses',
         component: AdminCoursesComponent
       },
       {
+        path: 'admin-courses/admin-course-detail/:id',
+        component: AdminCourseDetailComponent
+      },
+       {
+        path: 'admin-courses/admin-course-update/:id',
+        component: AdminCourseUpdateComponent
+      },
+      // Kết thúc Routing của phần quản lý khóa học
+
+      {
+        path: 'admin-major',
+        component: AdminMajorComponent
+      },
+      {
+        path: 'admin-programs',
+        component: AdminProgramsComponent
+      },
+      {
+        path: 'admin-program-study',
+        component: AdminProgramStudyComponent
+      },
+      {
+        path: 'admin-template',
+        component: AdminTemplateComponent
+      },
+      {
         path: 'reset-password',
         component: ResetPasswordComponent
+      },
+      {
+        path: 'admin-class',
+        loadChildren: () => import('./views/admin-class/admin-class.module').then(m => m.AdminClassModule)
+      },
+      {
+        path: 'admin-education',
+        loadChildren: () => import('./views/admin-education/admin-education.module').then(m => m.AdminEducationModule)
       },
       {
         path: 'dashboard',

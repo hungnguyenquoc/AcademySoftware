@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Academy.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,11 @@ namespace Academy.API.Data
             _context.Remove(entity);
         }
 
+        public async Task<IEnumerable<CourseCategory>> GetCourseCategories()
+        {
+            var coursesCate = await _context.CourseCategories.OrderByDescending(c => c.Cate_ID).ToListAsync();
+            return coursesCate;
+        }
         // public async Task<IEnumerable<CourseCategory>> GetCourseCategories()
         // {
         //     var courseCategories = await _context.CourseCategories.ToListAsync();
@@ -30,12 +36,18 @@ namespace Academy.API.Data
         //     return courseCategories;
         // }
 
-        // public async Task<CourseCategory> GetCourseCategory(int id)
-        // {
-        //     var courseCate = await _context.CourseCategories.FirstOrDefaultAsync(c => c.Cate_ID == id);
+        public async Task<CourseCategory> GetCourseCategory(int id)
+        {
+            var courseCate = await _context.CourseCategories.FirstOrDefaultAsync(c => c.Cate_ID == id);
 
-        //     return courseCate;
-        // }
+            return courseCate;
+        }
+
+        public int GetCourseMaxID()
+        {
+            int id = _context.CourseCategories.Max(c => c.Cate_ID);
+            return id;
+        }
 
         public async Task<bool> SaveAll()
         {

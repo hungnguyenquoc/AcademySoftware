@@ -14,11 +14,11 @@ namespace Academy.API.Models
         public string Maj_Code { get; set; }
         public string Maj_Description { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        // [Required]
+        // public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        // [ForeignKey("UserId")]
+        // public virtual User User { get; set; }
         public virtual IEnumerable<ProgramStudy> ProgramStudies { get; set; }
 
     }

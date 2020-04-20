@@ -14,6 +14,6 @@ namespace Academy.API.Models
         [MaxLength(256)]
         string UpdatedBy { get; set; }
 
-        bool Status { get; set; }
+        int Status { get; set; }
     } 
 }

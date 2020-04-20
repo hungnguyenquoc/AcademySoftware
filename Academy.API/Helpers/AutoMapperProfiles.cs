@@ -31,8 +31,30 @@ namespace Academy.API.Helpers
             CreateMap<UserForRegisterDto, User>();
             CreateMap<MajorDto, Major>();
             CreateMap<MajorForUpdateDto, Major>();
+            CreateMap<ProgramStudyDto, ProgramStudy>();
             CreateMap<RolesDto, Role>();
-            // CreateMap<CourseCategoryForAddDto, CourseCategory>();
+            CreateMap<CourseForAddDto, Course>();
+            CreateMap<CourseForDetailedDto, Course>();
+            CreateMap<CourseForListDto, Course>();
+            CreateMap<CourseForUpdateDto, Course>();
+
+            // CreateMap<CourseForListDto, Course>();
+            
+            CreateMap<CourseCategoryForAddDto, CourseCategory>();
+            CreateMap<CourseCategoryForDetailedDto, CourseCategory>();
+            CreateMap<CourseCategoryForUpdateDto, CourseCategory>();
+            CreateMap<CourseCategoryForListDto, CourseCategory>();
+
+
+            CreateMap<OpenRegisterForAddDto, OpenRegister>();
+            CreateMap<OpenRegisterForListDto, OpenRegister>();
+            CreateMap<OpenRegisterForDetailedDto, OpenRegister>();
+            CreateMap<OpenRegisterForUpdateDto, OpenRegister>();
+
+            CreateMap<ClassForAddDto, Class>();
+            CreateMap<ClassForListDto, Class>();
+            CreateMap<ClassForDetailedDto, Class>();
+            CreateMap<ClassForUpdateDto, Class>();
 
             // CreateMap<UserForUpdateDto, User>();
             //CreateMap<Photo, PhotoForReturnDto>();

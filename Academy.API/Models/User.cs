@@ -25,8 +25,10 @@ namespace Academy.API.Models
         public DateTime LastActive { get; set; }
         public virtual ICollection<Photo> Photos {get;set;}
         public virtual ICollection<UserRole> UserRoles {get;set;}
-        public ICollection<OpenRegister> OpenRegisters {get;set;}
-        public virtual IEnumerable<Major> Majors { get; set; }
+        // public ICollection<OpenRegister> OpenRegisters {get;set;}
+        public ICollection<OpenRegisterUser> OpenRegisterUsers { get; set; }
+
+        // public virtual IEnumerable<Major> Majors { get; set; }
         public virtual IEnumerable<Event> Events { get; set; }
 
         // public virtual IEnumerable<OpenRegister> OpenRegisters { get; set; }

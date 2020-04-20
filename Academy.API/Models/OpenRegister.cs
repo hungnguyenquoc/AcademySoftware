@@ -19,18 +19,18 @@ namespace Academy.API.Models
 
         public DateTime EndTime { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
-
         // [Required]
-        // public int Cou_Id { get; set; }
+        // public int UserId { get; set; }
 
-        // [ForeignKey("Cou_Id")]
-        // public virtual Course Course { get; set; }
-        public virtual IEnumerable<Course> Courses { get; set; }
+        // [ForeignKey("UserId")]
+        // public virtual User User { get; set; }
 
+        [Required]
+        public int CourseId { get; set; }
+        [ForeignKey("CourseId")]
+        public virtual Course Course {get;set;}
+        public ICollection<OpenRegisterUser> OpenRegisterUsers { get; set; }
+
+    //    public virtual Course Course {get;set;}
     }
 }

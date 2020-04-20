@@ -30,8 +30,17 @@ namespace Academy.API.Models
         [MaxLength(256)]
         public string PaymentStatus { get; set; }
 
-        public virtual IEnumerable<BookingDetail> BookingDetails { get; set; }
-        public virtual IEnumerable<Class> Classes { get; set; }
+        [Required]
+        public int ClassId { get; set; }
+
+        [ForeignKey("ClassId")]
+        public virtual Class Class { get; set; }
+
+        // public ICollection<BookingDetail> BookingDetails { get; set; }
+
+
+        // public virtual IEnumerable<BookingDetail> BookingDetails { get; set; }
+        // public virtual IEnumerable<Class> Classes { get; set; }
 
     }
 }

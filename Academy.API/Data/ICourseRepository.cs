@@ -11,6 +11,7 @@ namespace Academy.API.Data
         Task<bool> SaveAll();
         Task<IEnumerable<Course>> GetCourses();
         Task<Course> GetCourse(int id);
+        int GetCourseMaxID();
 
     }
 }

@@ -1,0 +1,90 @@
+<div class="mt-5">
+  <div class="col-md-12">
+    <div class="card card-wrapper">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Xem chi tiết khóa học</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="detailForm">
+          <!-- Tên khóa học -->
+          <div class="form-group">
+            <label for="my-input">Tên khóa học</label>
+            <input class="form-control" placeholder="Tên khóa học" formControlName="couName">
+          </div>
+          <!--  -->
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+              <!-- Mã khóa học -->
+              <label for="">Mã khóa học</label>
+              <input class="form-control" formControlName="couCode">
+            </div>
+            <!-- Chương trình đào tạo -->
+            <div class="form-group col-md-6 ">
+              <label for="">Chương trình học</label>
+              <select name="proId" class="form-control" formControlName="proId" readonly>
+                <option value="">Chọn tên chương trình</option>
+                <ng-container *ngFor="let item of programsList">
+                  <option value="{{ item.id }}">
+                    {{item.pro_Name}}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <!-- Mô tả -->
+          <div class="form-group">
+            <label for="">Mô tả</label>
+            <textarea
+              class="form-control" formControlName="couDescription" cols="10"
+              rows="3"></textarea>
+          </div>
+          <!--  -->
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+              <!-- Giá khóa học -->
+              <label for="">Giá</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">VNĐ</div>
+                </div>
+                <input class="form-control"
+                  class="form-control" placeholder="Giá" formControlName="couPrice" type="number">
+              </div>
+            </div>
+            <!-- Giá ưu đãi -->
+            <div class="form-group col-md-6 ">
+              <label for="">Giá ưu đãi</label>
+              <input
+                class="form-control" placeholder="Giá ưu đãi" formControlName="couPromotionPrice" type="number">
+            </div>
+          </div>
+          <!--  -->
+          <!--  -->
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+                <label for="">Tình trạng</label>
+                <input
+                  class="form-control" placeholder="Giá ưu đãi" formControlName="status" >
+              </div>
+            <!-- Giá ưu đãi -->
+            <div class="form-group col-md-6 ">
+              <label for="">Số lượt xem</label>
+              <input
+                class="form-control" placeholder="Giá ưu đãi" formControlName="couViewCount" type="number">
+            </div>
+          </div>
+          <!-- Nội dung -->
+          <div class="form-group">
+            <label for="">Nội dung</label>
+            <textarea [innerHTML]  class="form-control" formControlName="couContent"></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<button class="btn btn-success" (click)="goPreviousPage()">Quay lại</button>

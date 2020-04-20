@@ -5,6 +5,7 @@ namespace Academy.API.Dtos
 {
     public class UserForRegisterDto
     {
+        public int Id { get; set; }
         [Required]
         public string Username { get; set; }
     

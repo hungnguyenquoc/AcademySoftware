@@ -1,0 +1,94 @@
+<ng-template #itemUpdateModal>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Thêm khoá học mới </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm" id="editForm" autocomplete="on">
+        <div class="form-group">
+            <label for="my-input">Tên</label>
+            <input class="form-control" type="text" 
+            name="maj_Name" 
+            [(ngModel)]="majorList.maj_Name"
+            >
+        </div>
+        <div class="form-group">
+            <label for="my-input">Mã</label>
+            <input class="form-control" type="text" 
+            name="maj_Name" 
+            [(ngModel)]="majorList.maj_Code"
+            >
+        </div>
+        <div class="form-group">
+          <label for="my-input">Mô tả</label>
+          <input class="form-control" type="text" 
+          name="maj_Name" 
+          [(ngModel)]="majorList.maj_Description"
+          >
+      </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Hủy</button>
+      <button type="button" class="btn btn-success" (click)="updateMajor(major.id)">Lưu</button>
+    </div>
+  </ng-template>
+  
+
+
+
+<!-- <form #editForm="ngForm" autocomplete="on" *ngIf="majorService.formData">
+    <div class="form-group">
+        <label for="my-input">Tên</label>
+        <input class="form-control" type="text" 
+        name="maj_Name" 
+        [(ngModel)]="majorService.formData.maj_Name"
+        >
+    </div>
+    <div class="form-group">
+        <label for="my-input">Mã</label>
+        <input class="form-control" type="text" 
+        name="maj_Name" 
+        [(ngModel)]="majorService.formData.maj_Code"
+        >
+    </div>
+    <div class="form-group">
+        <label for="my-input">Text</label>
+        <input id="my-input" class="form-control" type="text" name="">
+    </div>
+</form> -->
+
+<!-- <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMajor(item.id)">
+    <div class="form-group">
+        <label for="my-input">Tên ngành</label>
+        <input class="form-control" type="text" 
+        name="maj_Name" 
+        [(ngModel)]="item.maj_Name"
+        >
+    </div>
+    <div class="form-group">
+        <label for="my-input">Mã ngành</label>
+        <input class="form-control" type="text" name="maj_Code" [(ngModel)]="item.maj_Code">
+    </div>
+    <div class="form-group">
+        <label for="my-input">Mô tả</label>
+        <input class="form-control" type="text" name="maj_Description" [(ngModel)]="item.maj_Description">
+    </div>
+    <div class="modal-footer">
+        <div class="form-group text-right">
+          <button class="btn btn-sm btn-primary" type="submit">
+            <i class="fa fa-dot-circle-o"></i> 
+            Xác nhận
+          </button>
+          <button class="btn btn-sm btn-danger" type="reset">
+            <i class="fa fa-ban"></i> Reset</button>
+        </div>
+      </div>
+</form> -->
+
+
+
+
+

@@ -1,0 +1,48 @@
+<!-- <form [formGroup]="createForm" (ngSubmit)="addMajor()">
+  <div class="form-group">
+    <label for="my-input">Tên ngành</label>
+    <input [ngClass]="{'is-invalid': createForm.get('maj_Name').errors && createForm.get('maj_Name').touched}"
+      class="form-control" placeholder="Tên ngành" formControlName="maj_Name">
+    <div class="invalid-feedback">
+      <span *ngIf="createForm.get('maj_Name').hasError('majorNameTaken')">
+        Tên ngành đã tồn tại trong hệ thống
+      </span>
+      <span *ngIf="createForm.get('maj_Name').hasError('required')">
+        Vui lòng nhập tên ngành
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="my-input">Mã ngành</label>
+    <input [ngClass]="{'is-invalid': createForm.get('maj_Code').errors && createForm.get('maj_Code').touched}"
+      class="form-control" placeholder="Tên ngành" formControlName="maj_Code">
+    <div class="invalid-feedback">
+      <span *ngIf="createForm.get('maj_Code').hasError('majorCodeTaken')">
+        Mã ngành đã tồn tại trong hệ thống
+      </span>
+      <span *ngIf="createForm.get('maj_Code').hasError('required')">
+        Vui lòng nhập mã ngành
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="my-input">Mô tả</label>
+    <input
+      [ngClass]="{'is-invalid': createForm.get('maj_Description').errors && createForm.get('maj_Description').touched}"
+      class="form-control" placeholder="Tên ngành" formControlName="maj_Description">
+    <div class="invalid-feedback">
+      Vui lòng nhập mô tả
+    </div>
+  </div>
+  <input type="hidden" formControlName="status">
+  <div class="modal-footer">
+    <div class="form-group text-right">
+      <button class="btn btn-sm btn-primary" [disabled]="!createForm.valid" type="submit">
+        <i class="fa fa-dot-circle-o"></i>
+        Xác nhận
+      </button>
+      <button class="btn btn-sm btn-danger" type="reset">
+        <i class="fa fa-ban"></i> Reset</button>
+    </div>
+  </div>
+</form> -->

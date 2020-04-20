@@ -1,0 +1,134 @@
+<ng-template #itemUpdateMdl >
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">Sửa khoá học </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form  #editForm="ngForm" id="editForm"   >
+          <div class="row">
+            <div class="col-md-6">
+                <div class="image-preview mb-3" *ngIf="previewUrl">
+                    <img [src]="previewUrl" height="200" width="300"/>                 
+                </div>    
+                <div class="image-preview mb-3" *ngIf="!previewUrl">
+                    <img src="{{course.couImage}}" height="200" width="300" />                 
+                </div>
+            </div>
+                <input type="file" name="file" (change)="onFileSelect($event)" [(ngModel)]="file" />
+    
+            
+            
+            
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6 ">
+              <!-- Label Họ -->
+              <label for="">Tên khoá học</label>
+              <input type="text" [(ngModel)]="course.couName"
+                class="form-control"
+                placeholder="Nhập tên khoá học" 
+                name="couName">
+              <div class="invalid-feedback">
+                Vui lòng nhập tên khoá học
+              </div>
+            </div>
+          </div>
+          <div class="form-group ">
+            <!-- Label Họ -->
+            <label for="">Tên khoá học</label>
+            <input type="text" [(ngModel)]="course.couCode"
+              class="form-control"
+              placeholder="Nhập tên khoá học" 
+              name="couCode">
+            <div class="invalid-feedback">
+              Vui lòng nhập tên khoá học
+            </div>
+          </div>
+          <div class="form-group ">
+            <!-- Label Họ -->
+            <label for="">Tên khoá học</label>
+            <input type="text" [(ngModel)]="course.couDescription"
+              class="form-control"
+              placeholder="Nhập tên khoá học" 
+              name="couDescription">
+            <div class="invalid-feedback">
+              Vui lòng nhập tên khoá học
+            </div>
+          </div>
+          <!-- </td>
+               <td [innerHTML] ="item.couContent">
+              </td> -->
+             
+          <div class="form-row">
+            <div class="form-group col-md-6 ">
+              <!-- Label Họ -->
+              <label for="">Giá khoá học</label>
+              <input type="number"  [(ngModel)]="course.couPrice" name="couPrice"
+                class="form-control"
+                 placeholder="Nhập giá khoá học" 
+                 >
+              <div class="invalid-feedback">
+                Vui lòng nhập giá khoá học
+              </div>
+            </div>
+            <div class="form-group col-md-6 ">
+              <label for="">Chương trình học</label>
+              <select name="proId" [(ngModel)]="course.proId" class="form-control">
+                <option value="">Chọn tên chương trình</option>
+                <ng-container *ngFor="let item of programsList">
+                  <option [ngValue]="item.id">
+                    {{item.pro_Code}}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="form-group ">
+            <!-- Label Họ -->
+            <label for="">Giádsdsa khoá học</label>
+            <input type="number"  [(ngModel)]="course.couPromotionPrice" name="couPromotionPrice"
+              class="form-control"
+               placeholder="Nhập giá khoá học" 
+               >
+            <div class="invalid-feedback">
+              Vui lòng nhập giá khoá học
+            </div>
+            </div>
+            <div class="form-group ">
+              <!-- Label Họ -->
+              <label for="">Giádsdsa khoá học</label>
+              <input type="number"  [(ngModel)]="course.couViewCount" name="couViewCount"
+                class="form-control"
+                 placeholder="Nhập giá khoá học" 
+                 >
+              <div class="invalid-feedback">
+                Vui lòng nhập giá khoá học
+              </div>
+              </div>
+          <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="status" [(ngModel)]="course.status" > Kích hoạt
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group ">
+          <!-- Label Họ -->
+          <label for="">Nội dung khóa học</label>
+          <textarea type="text" [(ngModel)]="course.couContent" class="form-control" name="couContent"></textarea>          
+          <div class="invalid-feedback">
+            Vui lòng nhập tên khoá học
+          </div>
+        </div>   
+        </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Hủy</button>
+      <button type="button" class="btn btn-success" (click)="updateCourse(course.id)" >Lưu</button>
+    </div>
+  </ng-template>

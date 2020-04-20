@@ -1,0 +1,54 @@
+<form [formGroup]="createForm" (ngSubmit)="insertForm()" class="form-horizontal">
+    <label for="my-input">Tên chương trình</label>
+    <input [ngClass]="{'is-invalid': createForm.get('pro_Name').errors && createForm.get('pro_Name').touched}"
+      class="form-control" placeholder="Tên chương trình" formControlName="pro_Name">
+    <!-- <span *ngIf="!checkProName(this.pro_Name)" class="text-danger">exost</span> -->
+    <div class="invalid-feedback" *ngIf="createForm.get('pro_Name').touched 
+                && createForm.get('pro_Name').hasError('required')">
+      Vui lòng nhập tên chương trình
+    </div>
+   
+    <!-- <span *ngIf="!createForm.checkProName(pro_Name)" class="text-danger"> -->
+    <!-- <div *ngIf="createForm.errors?.programStudy">fđsfdsf</div> -->
+    <!-- <div class="invalid-feedback" *ngIf="createForm.get('pro_Name').invalid.valueOf()"></div> -->
+    <!-- <div *ngIf="createForm.get('pro_Name')"></div> -->
+    <label for="my-input">Mã chương trình</label>
+    <input [ngClass]="{'is-invalid': createForm.get('pro_Code').errors && createForm.get('pro_Code').touched}"
+      class="form-control" placeholder="Mã chương trình" formControlName="pro_Code">
+    <div class="invalid-feedback" *ngIf="createForm.get('pro_Code').touched 
+                && createForm.get('pro_Code').hasError('required')">
+      Vui lòng nhập mã
+    </div>
+    <label for="my-input">Mô tả</label>
+    <input [ngClass]="{'is-invalid': createForm.get('pro_Description').errors && createForm.get('pro_Description').touched}"
+      class="form-control" placeholder="Mô tả" formControlName="pro_Description">
+    <div class="invalid-feedback" *ngIf="createForm.get('pro_Description').touched 
+                && createForm.get('pro_Name').hasError('required')">
+      Vui lòng nhập mô tả
+    </div>    
+    <div class="form-group">
+        <label for="">Tên ngành</label>
+        <select name="majorId" class="form-control" formControlName="majorId"
+      
+        >
+            <option value="">Chọn tên ngành</option>
+            <ng-container *ngFor="let item of majorsList">
+                <option value="{{ item.id }}">
+                    {{item.maj_Name}}
+                </option>
+            </ng-container>
+        </select>
+
+    </div>
+    <input type="hidden" formControlName="status">
+    <div class="modal-footer">
+      <div class="form-group text-right">
+        <button class="btn btn-sm btn-primary" type="submit">
+          <i class="fa fa-dot-circle-o"></i> 
+          Xác nhận
+        </button>
+        <button class="btn btn-sm btn-danger" type="reset">
+          <i class="fa fa-ban"></i> Reset</button>
+      </div>
+    </div>
+</form> 

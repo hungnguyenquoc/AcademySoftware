@@ -1,16 +1,19 @@
-<!-- <div class="mt-5">
+<div class="mt-5">
   <div class="col-md-12">
     <div class="card card-wrapper">
       <div class="card-header">
         <div class="row">
           <div class="col-md-6">
-            <h4>Quản lý danh mục khóa học</h4>
-          </div>
+            <h4>Quản lý khóa học</h4>
+          </div> 
           <div class="col-md-6 text-right">
-            <button class="btn btn-success" data-toggle="modal" data-target="#addNewModal">
+            <button class="btn btn-success"  (click)="modal.showModal();">
               <i class="fa fa-plus"></i>
-              Thêm danh mục
+              Thêm khóa học
             </button>
+          <button class="btn btn-secondary">
+            <i class="fa fa-book"></i>
+            Quản lý đăng ký khóa học</button>
           </div>
         </div>
       </div>
@@ -19,110 +22,151 @@
           <thead>
             <tr>
               <th>STT</th>
-              <th>Tên</th>
-              <th>Mô tả</th>
-              <th>Trạng thái</th>
-              <th>Tùy chọn</th>
+              <th>Tên khóa học</th>
+              <th>Ảnh đại diện</th>
+              <th>Giá</th>
+              <th>Ngành</th>
+              <th>Tình trạng</th>
+              <th>Thao tác</th>
             </tr>
           </thead>
-          <tbody *ngFor="let item of listCourseCategory; let i = index">
-            <tr>
+          <tbody>
+            <tr *ngFor="let item of coursesList; let i = index">
               <td> {{ i + 1}} </td>
-              <td> {{ item.cate_Name}}</td>
-              <td> {{ item.cate_Description}}</td>
+              <td> {{ item.couName}}</td>
+              <td class="text-center">
+                <img src="{{ item.couImage }}" style="width: 100px; height: 80px;" alt="">
+              <!-- </td>
+               <td [innerHTML] ="item.couContent">
+              </td> -->
+              <!-- <td class="text-center">
+                <img src="{{ item.couMoreImages }}" style="width: 100px; height: 80px;" alt="">
+              </td> -->
+              <td> {{ item.couPrice | currency:'VND':'symbol':'4.2-2':'fr' }}</td>
+              <td>
+                <div *ngFor="let program of programsList">
+                  <span *ngIf="item.proId == program.id">{{ program.pro_Name}}</span>
+                </div>
+              </td> 
               <td>
                 <span *ngIf="item.status == 1; else Nu" class="badge badge-success">Kích hoạt</span>
-                <ng-template #Nu>
-                  <span class="badge badge-danger">Chưa kích hoạt</span>
-                </ng-template>
+                <ng-template #Nu> <span style="color: red;">Đang bán</span></ng-template>
               </td>
               <td>
-                <a href="" class="mr-2">
+                <a class="mr-2" (click)="viewDetailData(item.id)">
                   <i class="fa fa-eye font-weight-200" aria-hidden="true"
                     style="color: blue; font-size: 1.2em; font-weight: bold"></i>
                 </a>
-                <a href="" class="mr-2">
+                <a class="mr-2" (click)="modal1.showModal()" >
                   <i class="fa fa-pencil-square-o font-weight-200" aria-hidden="true"
                     style="color: green; font-size: 1.2em"></i>
                 </a>
-                <a href="">
-                  <i class="fa fa-trash mr-2 font-weight-200" aria-hidden="true"
-                    style="color: red; font-size: 1.2em"></i>
-                </a>
               </td>
+              <app-admin-course-update #modal1 [course]="item" (itemCreated)="itemCreated($event)"></app-admin-course-update>
             </tr>
           </tbody>
         </table>
-
-        <button class="btn btn-success" [swal]="['Oops!', 'This is not implemented yet :/', 'warning']">
-          Do it!
-        </button>
-
       </div>
     </div>
   </div>
-</div> -->
+</div>
+
+<button class="btn btn-primary text-left mb-2" (click)="modal.showModal();" ><i class="fa fa-plus"></i></button>
+<app-admin-course-add #modal  (itemCreated)="itemCreated($event)"></app-admin-course-add>
+
+<!-- <app-admin-course-update></app-admin-course-update> -->
 
 
 
-<!-- begin modal add new record -->
-<!--  -->
-<!-- <div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="modal fade" id="create" role="dialog" aria-hidden="true" #create>
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Tạo tài khoản</h5>
-        <button type="reset" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h4 class="modal-title text-dark">Thêm ngành học</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="addForm" (ngSubmit)="createSubmitForm()" class="form-horizontal">
-          <div class="form-group">
-            <label for="my-input">Tên danh mục</label>
-            <input [ngClass]="{'is-invalid': addForm.get('cate_Name').errors && addForm.get('cate_Name').touched}"
-              class="form-control" placeholder="Họ" formControlName="cate_Name">
-            <div class="invalid-feedback" *ngIf="addForm.get('cate_Name').touched 
-                && addForm.get('cate_Name').hasError('required')">
-              Vui lòng nhập tên danh mục
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="my-input">Alias</label>
-            <input [ngClass]="{'is-invalid': addForm.get('cate_Alias').errors && addForm.get('cate_Alias').touched}"
-              class="form-control" placeholder="Alias" formControlName="cate_Alias">
-            <div class="invalid-feedback" *ngIf="addForm.get('cate_Alias').touched 
-                  && addForm.get('cate_Alias').hasError('required')">Vui lòng nhập Alias</div>
-          </div>
-          <div class="form-group">
-            <label for="my-input">Mô tả</label>
-            <input
-              [ngClass]="{'is-invalid': addForm.get('cate_Description').errors && addForm.get('cate_Description').touched}"
-              class="form-control" placeholder="Nhập mô tả" formControlName="cate_Description">
-            <div class="invalid-feedback" *ngIf="addForm.get('cate_Description').touched 
-                && addForm.get('cate_Description').hasError('required')">Vui lòng nhập mô tả</div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" formControlName="status"> Kích hoạt
-                </label>
+        <form [formGroup]="addForm" (ngSubmit)="addCourse()">
+          <label for="">Ảnh đại diện khóa học:</label>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="image-preview mb-3" *ngIf="previewUrl">
+                <img [src]="previewUrl" height="200" width="300" />
+              </div>
+
+              <div class="image-preview mb-3" *ngIf="!previewUrl">
+                <img src="../../../assets/img/avatars/1.jpg" height="200" width="300" />
               </div>
             </div>
+            <input type="file" name="file" (change)="onFileSelect($event)" />
           </div>
+          <input type='file' name="multipleFiles" (change)="onMultipleFileSelect($event)" multiple="">
 
-          <div class="form-group text-center">
-            <button class="btn btn-sm btn-primary" type="submit">
-              <i class="fa fa-dot-circle-o"></i> Đăng ký</button>
-            <button class="btn btn-sm btn-danger" type="reset">
-              <i class="fa fa-ban"></i> Reset</button>
+          <div class="form-group">
+            <label for="my-input">Tên khóa học</label>
+            <input class="form-control" type="text" formControlName="couName">
+          </div>
+          <div class="form-group">
+            <label for="my-input">Tên khóa học</label>
+            <input class="form-control" type="text" formControlName="couPrice">
+          </div>
+          <div class="form-group">
+            <label for="my-input">Tên khóa học</label>
+            <input class="form-control" type="text" formControlName="couPromotionPrice">
+          </div>
+          <input type="hidden" formControlName="status">
+          <input type="hidden" formControlName="couViewCount">
+
+          <div class="form-group">
+            <label for="">Tên ngành</label>
+            <select name="proId" class="form-control" formControlName="proId">
+              <option value="">Chọn tên ngành</option>
+              <ng-container *ngFor="let item of programsList">
+                <option value="{{ item.id }}">
+                  {{item.pro_Name}}
+                </option>
+              </ng-container>
+            </select>
+
+          </div>
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button class="btn btn-sm btn-primary" type="submit">
+                <i class="fa fa-dot-circle-o"></i>
+                Xác nhận
+              </button>
+              <button class="btn btn-sm btn-danger" type="reset">
+                <i class="fa fa-ban"></i> Reset</button>
+            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div> -->
-<!--  -->
-<!-- end modal add new record  -->
+<!-- end modal create -->

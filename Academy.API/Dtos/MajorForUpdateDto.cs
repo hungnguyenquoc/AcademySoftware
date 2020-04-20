@@ -7,7 +7,6 @@ namespace Academy.API.Dtos
         public string Maj_Name { get; set; }
         public string Maj_Code { get; set; }
         public string Maj_Description { get; set; }
-        public int UserId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

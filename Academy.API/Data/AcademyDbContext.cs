@@ -15,7 +15,7 @@ namespace Academy.API.Data
         public DbSet<Value> Values {get;set;}
         // public DbSet<User> Users {get;set;}
         public DbSet<BookingCourse> BookingCourses {get;set;}
-        public DbSet<BookingDetail> BookingDetails {get;set;}
+        // public DbSet<BookingDetail> BookingDetails {get;set;}
         public DbSet<OpenRegister> OpenRegisters {get;set;}
         public DbSet<Photo> Photos {get;set;}
         public DbSet<Class> Classes {get;set;}
@@ -23,6 +23,9 @@ namespace Academy.API.Data
         public DbSet<Major> Majors {get;set;}
 
         public DbSet<ProgramStudy> ProgramStudies {get;set;}
+        public DbSet<CourseCategory> CourseCategories {get;set;}
+        public DbSet<OpenRegisterUser> OpenRegisterUsers {get;set;}
+
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
@@ -42,7 +45,34 @@ namespace Academy.API.Data
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
             });
-        }
+             builder.Entity<OpenRegisterUser>(openRegisterUser => 
+            {
+                openRegisterUser.HasKey(uc => new {uc.UserId, uc.OpenId});
 
+                openRegisterUser.HasOne(uc => uc.OpenRegister)
+                    .WithMany(c => c.OpenRegisterUsers)
+                    .HasForeignKey(uc => uc.OpenId)
+                    .IsRequired();
+
+                openRegisterUser.HasOne(uc => uc.User)
+                    .WithMany(u => u.OpenRegisterUsers)
+                    .HasForeignKey(uc => uc.UserId)
+                    .IsRequired();
+            });
+            //  builder.Entity<BookingDetail>(bookingDetails => 
+            // {
+            //     bookingDetails.HasKey(uc => new {uc.Cou_ID, uc.Book_ID});
+
+            //     bookingDetails.HasOne(uc => uc.Course)
+            //         .WithMany(c => c.BookingDetails)
+            //         .HasForeignKey(uc => uc.Cou_ID)
+            //         .IsRequired();
+
+            //     bookingDetails.HasOne(uc => uc.BookingCourse)
+            //         .WithMany(u => u.BookingDetails)
+            //         .HasForeignKey(uc => uc.Book_ID)
+            //         .IsRequired();
+            // });
+        }
     }
 }

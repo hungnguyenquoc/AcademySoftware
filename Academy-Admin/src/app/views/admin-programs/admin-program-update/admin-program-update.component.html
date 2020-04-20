@@ -1,0 +1,27 @@
+<form #editForm="ngForm" id="editForm">
+    <div class="form-group">
+        <label for="my-input">Tên ngành</label>
+        <input class="form-control" type="text" 
+        name="pro_Name" 
+        [(ngModel)]="item.pro_Name"
+        >
+    </div>
+    <div class="form-group">
+        <label for="my-input">Mã ngành</label>
+        <input class="form-control" type="text" name="pro_Code" [(ngModel)]="item.pro_Code">
+    </div>
+    <div class="form-group">
+        <label for="my-input">Mô tả</label>
+        <input class="form-control" type="text" name="pro_Description" [(ngModel)]="item.pro_Description">
+    </div>
+    <div class="modal-footer">
+        <div class="form-group text-right">
+          <button class="btn btn-sm btn-primary" type="submit">
+            <i class="fa fa-dot-circle-o"></i> 
+            Xác nhận
+          </button>
+          <button class="btn btn-sm btn-danger" type="reset">
+            <i class="fa fa-ban"></i> Reset</button>
+        </div>
+      </div>
+</form>

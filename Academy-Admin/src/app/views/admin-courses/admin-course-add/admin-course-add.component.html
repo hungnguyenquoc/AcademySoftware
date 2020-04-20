@@ -1,0 +1,129 @@
+<ng-template #itemCreateMdl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Thêm khoá học mới </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addForm" (ngSubmit)="addCourse()">
+      <label for="">Ảnh đại diện khóa học:</label>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="image-preview mb-3" *ngIf="previewUrl">
+            <img [src]="previewUrl" height="200" width="300" />
+          </div>
+
+          <div class="image-preview mb-3" *ngIf="!previewUrl">
+            <img src="../../../assets/img/avatars/1.jpg" height="200" width="300" />
+          </div>
+        </div>
+        <input type="file" name="file" (change)="onFileSelect($event)" class="btn btn-success" />
+      </div>
+      <!-- Tên khóa học -->
+      <div class="form-group">
+        <label for="my-input">Tên khóa học</label>
+        <input [ngClass]="{'is-invalid': addForm.get('couName').errors && addForm.get('couName').touched}"
+          class="form-control" placeholder="Tên khóa học" formControlName="couName">
+        <div class="invalid-feedback">
+          <span *ngIf="addForm.get('couName').hasError('courseNameTaken')">
+            Tên khóa học đã tồn tại trong hệ thống
+          </span>
+          <span *ngIf="addForm.get('couName').hasError('required')">
+            Vui lòng nhập tên khóa học
+          </span>
+        </div>
+      </div>
+      <!--  -->
+      <div class="form-row">
+        <div class="form-group col-md-6 ">
+          <!-- Mã khóa học -->
+          <label for="">Mã khóa học</label>
+          <input [ngClass]="{'is-invalid': addForm.get('couCode').errors && addForm.get('couCode').touched}"
+            class="form-control" placeholder="Mã khóa học" formControlName="couCode">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('couCode').hasError('courseCodeTaken')">
+              Mã khóa học đã tồn tại trong hệ thống
+            </span>
+            <span *ngIf="addForm.get('couCode').hasError('required')">
+              Vui lòng nhập mã khóa học
+            </span>
+          </div>
+        </div>
+        <!-- Chương trình đào tạo -->
+        <div class="form-group col-md-6 ">
+          <label for="">Chương trình học</label>
+          <select name="proId" class="form-control" formControlName="proId">
+            <option value="">Chọn tên chương trình</option>
+            <ng-container *ngFor="let item of programsList">
+              <option value="{{ item.id }}">
+                {{item.pro_Name}}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <!-- Mô tả -->
+      <div class="form-group">
+        <label for="">Mô tả</label>
+        <textarea
+          [ngClass]="{'is-invalid': addForm.get('couDescription').errors && addForm.get('couDescription').touched}"
+          class="form-control" placeholder="Nhập mô tả" formControlName="couDescription" cols="10" rows="3"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="addForm.get('couDescription').touched && addForm.get('couDescription').hasError('required')">
+          Vui lòng nhập mô tả khóa học
+        </div>
+      </div>
+      <!--  -->
+      <div class="form-row">
+        <div class="form-group col-md-6 ">
+          <!-- Giá khóa học -->
+          <label for="">Giá</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">VNĐ</div>
+            </div>
+            <input class="form-control"
+              [ngClass]="{'is-invalid': addForm.get('couPrice').errors && addForm.get('couPrice').touched}"
+              class="form-control" placeholder="Giá" formControlName="couPrice" type="number">
+            <!-- <div class="invalid-feedback"
+              *ngIf="addForm.get('couPrice').touched && addForm.get('couPrice').hasError('required')">
+              Vui lòng nhập giá khóa học
+            </div> -->
+          </div>
+        </div>
+        <!-- Giá ưu đãi -->
+        <div class="form-group col-md-6 ">
+          <label for="">Giá ưu đãi</label>
+          <input
+            [ngClass]="{'is-invalid': addForm.get('couPromotionPrice').errors && addForm.get('couPromotionPrice').touched}"
+            class="form-control" placeholder="Giá ưu đãi" formControlName="couPromotionPrice" type="number"  
+          >
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('couPromotionPrice').hasError('required')">
+              Vui lòng nhập giá ưu đãi
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- Nội dung -->
+      <div class="form-group">
+        <label for="">Nội dung</label>
+        <ck-editor name="editor1" formControlName="couContent" aria-placeholder="Nhập nội dung" skin="moono-lisa" language="vi" [fullPage]="false"></ck-editor>
+        <!-- 
+        <textarea [ngClass]="{'is-invalid': addForm.get('couContent').errors && addForm.get('couContent').touched}"
+          class="form-control" placeholder="Địa chỉ" formControlName="couContent" cols="10" rows="3"></textarea>
+        <div class="invalid-feedback"
+          *ngIf="addForm.get('couContent').touched && addForm.get('couContent').hasError('required')">
+          Vui lòng nhập nội dung khóa học
+        </div> -->
+      </div>
+      <input type="hidden" formControlName="status">
+      <input type="hidden" formControlName="couViewCount">
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Hủy</button>
+    <button type="button" class="btn btn-success" (click)=" addCourse()">Lưu</button>
+  </div>
+</ng-template>

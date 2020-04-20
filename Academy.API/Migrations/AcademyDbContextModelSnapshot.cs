@@ -38,6 +38,8 @@ namespace Academy.API.Migrations
                     b.Property<string>("BookPhone")
                         .HasMaxLength(100);
 
+                    b.Property<int>("ClassId");
+
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTime?>("CreatedDate");
@@ -48,7 +50,7 @@ namespace Academy.API.Migrations
                     b.Property<string>("PaymentStatus")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<string>("UpdatedBy");
 
@@ -56,38 +58,9 @@ namespace Academy.API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClassId");
+
                     b.ToTable("BookingCourses");
-                });
-
-            modelBuilder.Entity("Academy.API.Models.BookingDetail", b =>
-                {
-                    b.Property<int>("BookDetail_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Book_ID");
-
-                    b.Property<int>("Cou_ID");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime?>("CreatedDate");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<bool>("Status");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.Property<DateTime?>("UpdatedDate");
-
-                    b.HasKey("BookDetail_ID");
-
-                    b.HasIndex("Book_ID");
-
-                    b.HasIndex("Cou_ID");
-
-                    b.ToTable("BookingDetails");
                 });
 
             modelBuilder.Entity("Academy.API.Models.Class", b =>
@@ -96,11 +69,11 @@ namespace Academy.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BookId");
+                    b.Property<string>("Class_Address");
 
                     b.Property<string>("Class_Code");
 
-                    b.Property<string>("Class_Name");
+                    b.Property<string>("Class_Description");
 
                     b.Property<int>("CourseId");
 
@@ -108,15 +81,19 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTime?>("CreatedDate");
 
-                    b.Property<bool>("Status");
+                    b.Property<DateTime>("EndTime");
+
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("StudyTime");
 
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.HasIndex("CourseId");
 
@@ -156,11 +133,13 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTime?>("CreatedDate");
 
-                    b.Property<int?>("OpenRegisterId");
+                    b.Property<DateTime>("EndTime");
 
                     b.Property<int>("ProId");
 
-                    b.Property<bool>("Status");
+                    b.Property<DateTime>("StartTime");
+
+                    b.Property<int>("Status");
 
                     b.Property<string>("UpdatedBy");
 
@@ -168,11 +147,38 @@ namespace Academy.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OpenRegisterId");
-
                     b.HasIndex("ProId");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Academy.API.Models.CourseCategory", b =>
+                {
+                    b.Property<int>("Cate_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cate_Alias");
+
+                    b.Property<string>("Cate_Description");
+
+                    b.Property<string>("Cate_Image");
+
+                    b.Property<string>("Cate_Name");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.HasKey("Cate_ID");
+
+                    b.ToTable("CourseCategories");
                 });
 
             modelBuilder.Entity("Academy.API.Models.Event", b =>
@@ -197,7 +203,7 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<bool>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<string>("UpdatedBy");
 
@@ -228,17 +234,13 @@ namespace Academy.API.Migrations
 
                     b.Property<string>("Maj_Name");
 
-                    b.Property<bool>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Majors");
                 });
@@ -248,6 +250,8 @@ namespace Academy.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId");
 
                     b.Property<string>("CreatedBy");
 
@@ -260,19 +264,30 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<bool>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("OpenRegisters");
+                });
+
+            modelBuilder.Entity("Academy.API.Models.OpenRegisterUser", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("OpenId");
+
+                    b.HasKey("UserId", "OpenId");
+
+                    b.HasIndex("OpenId");
+
+                    b.ToTable("OpenRegisterUsers");
                 });
 
             modelBuilder.Entity("Academy.API.Models.Photo", b =>
@@ -318,7 +333,7 @@ namespace Academy.API.Migrations
 
                     b.Property<string>("Pro_Name");
 
-                    b.Property<bool>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<string>("UpdatedBy");
 
@@ -518,26 +533,16 @@ namespace Academy.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Academy.API.Models.BookingDetail", b =>
+            modelBuilder.Entity("Academy.API.Models.BookingCourse", b =>
                 {
-                    b.HasOne("Academy.API.Models.BookingCourse", "BookingCourse")
-                        .WithMany("BookingDetails")
-                        .HasForeignKey("Book_ID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Academy.API.Models.Course", "Course")
-                        .WithMany("BookingDetails")
-                        .HasForeignKey("Cou_ID")
+                    b.HasOne("Academy.API.Models.Class", "Class")
+                        .WithMany("BookingCourse")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Academy.API.Models.Class", b =>
                 {
-                    b.HasOne("Academy.API.Models.BookingCourse", "BookingCourse")
-                        .WithMany("Classes")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Academy.API.Models.Course", "Course")
                         .WithMany("Classes")
                         .HasForeignKey("CourseId")
@@ -546,10 +551,6 @@ namespace Academy.API.Migrations
 
             modelBuilder.Entity("Academy.API.Models.Course", b =>
                 {
-                    b.HasOne("Academy.API.Models.OpenRegister")
-                        .WithMany("Courses")
-                        .HasForeignKey("OpenRegisterId");
-
                     b.HasOne("Academy.API.Models.ProgramStudy", "ProgramStudy")
                         .WithMany("Courses")
                         .HasForeignKey("ProId")
@@ -564,18 +565,23 @@ namespace Academy.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Academy.API.Models.Major", b =>
+            modelBuilder.Entity("Academy.API.Models.OpenRegister", b =>
                 {
-                    b.HasOne("Academy.API.Models.User", "User")
-                        .WithMany("Majors")
-                        .HasForeignKey("UserId")
+                    b.HasOne("Academy.API.Models.Course", "Course")
+                        .WithMany("OpenRegisters")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Academy.API.Models.OpenRegister", b =>
+            modelBuilder.Entity("Academy.API.Models.OpenRegisterUser", b =>
                 {
+                    b.HasOne("Academy.API.Models.OpenRegister", "OpenRegister")
+                        .WithMany("OpenRegisterUsers")
+                        .HasForeignKey("OpenId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Academy.API.Models.User", "User")
-                        .WithMany("OpenRegisters")
+                        .WithMany("OpenRegisterUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

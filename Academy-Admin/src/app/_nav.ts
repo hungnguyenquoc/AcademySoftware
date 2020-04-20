@@ -16,9 +16,44 @@ export const navItems: INavData[] = [
     icon: 'icon-user',
   },
   {
+    title: true,
+    name: 'Đào tạo'
+  },
+  {
+    name: 'Quản lý lớp học',
+    url: '/admin-class',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'Danh sách lớp học',
+        url: '/admin-class/admin-class-list',
+        icon: 'icon-puzzle'
+      }]
+    },
+  {
+    name: 'Quản lý ngành học  ',
+    url: '/admin-major',
+    icon: 'icon-user',
+  },
+  {
     name: 'Quản lý khóa học',
     url: '/admin-courses',
     icon: 'icon-user',
+  },
+  {
+    name: 'Quản lý tạm thời',
+    url: '/admin-template',
+    icon: 'icon-user',
+  },
+  {
+    name: 'Quản lý chương trình học',
+    url: '/admin-program-study',
+    icon: 'icon-user',
+  },
+  {
+    name: 'Quản lý chương trình',
+    url: '/admin-programs',
+    icon: 'icon-pencil',
   },
   {
     name: 'Quản lý danh mục',
@@ -26,9 +61,11 @@ export const navItems: INavData[] = [
     icon: 'icon-user',
   },
   {
-    title: true,
-    name: 'Theme'
+    name: 'Quản lý danh mục',
+    url: '/admin-course-category',
+    icon: 'icon-user',
   },
+ 
   {
     name: 'Colors',
     url: '/theme/colors',
@@ -43,6 +80,28 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Components'
   },
+  // {
+  //   name: 'Đào tạo',
+  //   url: '/admin-class',
+  //   icon: 'icon-puzzle',
+  //   children: [
+  //     {
+  //       name: 'Lớp học',
+  //       url: '/admin-class/admin-class-list',
+  //       icon: 'icon-puzzle'
+  //     }]
+  //   },
+    {
+      name: 'CT Đào tạo',
+      url: '/admin-education',
+      icon: 'icon-puzzle',
+      children: [
+        {
+          name: 'Ngành học',
+          url: '/admin-education/admin-major',
+          icon: 'icon-puzzle'
+        }]
+      },
    {
     name: 'Base',
     url: '/base',

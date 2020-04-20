@@ -1,0 +1,66 @@
+<table  class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên chương trình</th>
+        <th>Mã</th>
+        <th>Mô tả</th>
+        <th>Ngày tạo</th>
+        <th>Được thêm bởi</th>
+        <th>Ngành học</th>
+        <th>Tình trạng</th>
+        <th>Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of programsList; let i = index">
+        <td> {{ i + 1}} </td>
+        <td> {{ item.pro_Name}}</td>
+        <td> {{ item.pro_Code}}</td>
+        <td> {{ item.pro_Description}}</td>
+        <td> {{ item.createdDate | date: 'dd/MM/yyyy'}}</td>
+        <td> {{ item.createdBy}}</td>
+        <td>
+          <div *ngFor="let major of majorsList">
+            <span *ngIf="item.majorId == major.id">{{ major.maj_Name}}</span>
+          </div>
+        </td>
+        <td>
+          <span *ngIf=" item.status == 1; else Nu" class="badge badge-success">Active</span>
+          <ng-template #Nu> <span class="badge badge-danger">Inactive</span></ng-template>
+        </td>
+        <td>
+          <a href="" class="mr-2">
+            <i class="fa fa-eye font-weight-200" aria-hidden="true"
+              style="color: blue; font-size: 1.2em; font-weight: bold"></i>
+          </a>
+          <a href="" class="mr-2" data-toggle="modal" data-target="#update">
+            <i class="fa fa-pencil-square-o font-weight-200" aria-hidden="true"
+              style="color: green; font-size: 1.2em"></i>
+          </a>
+          <a >
+            <i class="fa fa-trash mr-2 font-weight-200" aria-hidden="true" style="color: red; font-size: 1.2em"></i>
+          </a>
+        </td>
+        <!-- begin modal update -->
+        <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" class="text-dark">Cập nhật ngành học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <app-admin-program-study-update [item]="item"></app-admin-program-study-update>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- end modal update -->
+      </tr>
+    </tbody>
+  </table>

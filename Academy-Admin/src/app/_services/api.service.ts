@@ -10,7 +10,11 @@ export class ApiService {
   url = {
     users: `${this.baseUrl}users`,
     majors: `${this.baseUrl}majors`,
-    roles: `${this.baseUrl}roles`
+    roles: `${this.baseUrl}roles`,
+    programstudies: `${this.baseUrl}programstudies`,
+    courses: `${this.baseUrl}courses`,
+    openregisters: `${this.baseUrl}openregisters`,
+    classes: `${this.baseUrl}classes`,
     // coursecategories: `${this.baseUrl}coursecategories`
   };
 }

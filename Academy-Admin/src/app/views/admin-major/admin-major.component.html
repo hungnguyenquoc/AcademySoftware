@@ -1,1 +1,149 @@
-<p>admin-major works!</p>
+<div class="mt-5">
+    <div class="col-md-12">
+      <div class="card card-wrapper">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Quản lý ngành học</h4>
+            </div>
+            <div class="col-md-6 text-right">
+              <button class="btn btn-success" data-toggle="modal" data-target="#create">
+                <i class="fa fa-plus"></i>
+                Thêm ngành học
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên ngành</th>
+                <th>Mã</th>
+                <th>Mô tả</th>
+                <th>Ngày tạo</th>
+                <th>Được thêm bởi</th>
+                <th>Tình trạng</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of majorsList; let i = index">
+                <td> {{ i + 1}} </td>
+                <td> {{ item.maj_Name}}</td>
+                <td> {{ item.maj_Code}}</td>
+                <td> {{ item.maj_Description}}</td>
+                <td> {{ item.createdDate | date: 'dd/MM/yyyy'}}</td>
+                <td> {{ item.createdBy}}</td>
+                <td>
+                  <span class="badge badge-success">{{ item.status}}</span>
+                </td>
+                <td>
+                  <a href="" class="mr-2">
+                    <i class="fa fa-eye font-weight-200" aria-hidden="true"
+                      style="color: blue; font-size: 1.2em; font-weight: bold"></i>
+                  </a>
+                  <a class="mr-2" (click)="modal1.showModalUpdate()">
+                    <i class="fa fa-pencil-square-o font-weight-200" aria-hidden="true"
+                      style="color: green; font-size: 1.2em"></i>
+                  </a>
+                  <button (click)="deleteMajor(item.id)" >
+                    <i class="fa fa-trash mr-2 font-weight-200" aria-hidden="true" style="color: red; font-size: 1.2em"></i>
+                  </button>
+                </td>
+                <app-admin-major-update #modal1 [major]="item" (itemCreated)="itemCreated($event)"></app-admin-major-update>
+              </tr>
+            </tbody>
+          </table>         
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<!-- begin modal create -->
+<div class="modal fade" id="create" role="dialog" aria-hidden="true" #create>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-dark">Thêm ngành học</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createForm" (ngSubmit)="addMajor()">
+          <div class="form-group">
+            <label for="my-input">Tên ngành</label>
+            <input [ngClass]="{'is-invalid': createForm.get('maj_Name').errors && createForm.get('maj_Name').touched}"
+              class="form-control" placeholder="Tên ngành" formControlName="maj_Name">
+            <div class="invalid-feedback">
+              <span *ngIf="createForm.get('maj_Name').hasError('majorNameTaken')">
+                Tên ngành đã tồn tại trong hệ thống
+              </span>
+              <span *ngIf="createForm.get('maj_Name').hasError('required')">
+                Vui lòng nhập tên ngành
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="my-input">Mã ngành</label>
+            <input [ngClass]="{'is-invalid': createForm.get('maj_Code').errors && createForm.get('maj_Code').touched}"
+              class="form-control" placeholder="Tên ngành" formControlName="maj_Code">
+            <div class="invalid-feedback">
+              <span *ngIf="createForm.get('maj_Code').hasError('majorCodeTaken')">
+                Mã ngành đã tồn tại trong hệ thống
+              </span>
+              <span *ngIf="createForm.get('maj_Code').hasError('required')">
+                Vui lòng nhập mã ngành
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="my-input">Mô tả</label>
+            <input
+              [ngClass]="{'is-invalid': createForm.get('maj_Description').errors && createForm.get('maj_Description').touched}"
+              class="form-control" placeholder="Tên ngành" formControlName="maj_Description">
+            <div class="invalid-feedback">
+              Vui lòng nhập mô tả
+            </div>
+          </div>
+          <input type="hidden" formControlName="status">
+          <div class="modal-footer">
+            <div class="form-group text-right">
+              <button class="btn btn-sm btn-primary" [disabled]="!createForm.valid" type="submit">
+                <i class="fa fa-dot-circle-o"></i>
+                Xác nhận
+              </button>
+              <button class="btn btn-sm btn-danger" type="reset">
+                <i class="fa fa-ban"></i> Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal create -->
+
+
+<!-- begin modal update -->
+<!-- <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" class="text-dark">Cập nhật ngành học</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-admin-major-update></app-admin-major-update>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- end modal update -->
+
+ 

@@ -21,10 +21,13 @@ export class AdminUserListComponent implements OnInit {
     this.role.getAll().subscribe(date => this.roleList = date);
     // console.log(this.usersList);
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      // pageLength: 15,
+      // pagingType: 'full_numbers',
+      pageLength: 5,
       orderCellsTop: true,
-      processing: true
+      processing: true,
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.20/i18n/Vietnamese.json'
+      }
     };
   }
 

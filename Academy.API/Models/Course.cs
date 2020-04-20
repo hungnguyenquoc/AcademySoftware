@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -31,24 +32,18 @@ namespace Academy.API.Models
         public decimal CouPrice { get; set; }
 
         public decimal CouPromotionPrice { get; set; }
-
         public int? CouViewCount { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         [Required]
         public int ProId { get; set; }
-
         [ForeignKey("ProId")]
         public virtual ProgramStudy ProgramStudy { get; set; }
+        // public virtual IEnumerable<BookingDetail> BookingDetails { get; set; }
+        // public ICollection<BookingDetail> BookingDetails { get; set; }
 
-        // [Required]
-        // public int ReId { get; set; }
-        // [ForeignKey("ReId")]
-        // public virtual OpenRegister OpenRegister { get; set; }
-        public virtual IEnumerable<BookingDetail> BookingDetails { get; set; }
-
-        // public virtual IEnumerable<Course> Courses { get; set; }
         public virtual IEnumerable<Class> Classes { get; set; }
-
-
-}
+        public ICollection<OpenRegister> OpenRegisters {get;set;}
+    }
 }
