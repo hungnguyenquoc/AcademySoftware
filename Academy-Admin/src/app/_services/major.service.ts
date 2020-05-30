@@ -24,7 +24,7 @@ export class MajorService {
     return this.http.get<Major[]>(this.api.url.majors);
   }
   getMajor(id: number): Observable<Major> {
-    return this.http.get<Major>(this.api.url.majors + id, httpOptions);
+    return this.http.get<Major>(this.api.url.majors + '/' + id, httpOptions);
   }
   addMajor(model: any) {
     return this.http.post<Major>(this.api.url.majors, model, httpOptions);

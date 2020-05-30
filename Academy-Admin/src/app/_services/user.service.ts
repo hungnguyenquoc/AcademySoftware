@@ -23,4 +23,19 @@ export class UserService {
   getAll(): Observable< User> {
     return this.http.get< User>(this.api.url.users, httpOptions);
   }
+  getUserForId(id): Observable<User> {
+    return this.http.get<User>(this.api.url.users + '/' + id, httpOptions);
+  }
+  updateUser(id, model: any) {
+    return this.http.put(this.api.url.users + '/' + id, model, httpOptions);
+  }
+  // getCourse(id): Observable<Course> {
+  //   return this.http.get<Course>(this.api.url.courses + '/' + id, httpOptions);
+  // }
+  // addCourse(model: any): Observable<Course> {
+  //   return this.http.post<Course>(this.api.url.courses + '/', model, httpOptions).pipe(map(res => res));
+  // }
+  // updateCourse(id, model: any) {
+  //   return this.http.put(this.api.url.courses + '/' + id, model  , httpOptions);
+  // }
 }

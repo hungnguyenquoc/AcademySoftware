@@ -1,0 +1,6 @@
+<button class="btn btn-success" (click)="modal.showModal();" >
+    <i class="fa fa-plus"></i>
+    Thêm mới lớp học
+  </button>
+
+  <app-admin-announcement-add #modal (itemCreated)="itemCreated($event)" ></app-admin-announcement-add>

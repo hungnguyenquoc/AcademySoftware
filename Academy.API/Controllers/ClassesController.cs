@@ -7,6 +7,8 @@ using Academy.API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Academy.API.Controllers
 {
@@ -33,6 +35,28 @@ namespace Academy.API.Controllers
             var classes = await _repo.GetClasses();
             var classesToReturn = _mapper.Map<IEnumerable<ClassForListDto>>(classes);
             return Ok(classesToReturn);
+            // var classesList = await (from cl in _db.Classes
+            //                          orderby cl.Class_Code
+            //                          select new 
+            //                          {
+            //                              Id = cl.Id,
+            //                              Class_Code = cl.Class_Code,
+            //                              StudyTime = (from ol in cl.OptionClasses join o in _db.Options
+            //                                             on ol.Class_Id equals c.Id
+            //                                             select option.studyTime).ToList()
+            //                          }).ToListAsync();
+            // var classesList = await (from c in _db.Classes 
+            //                          join o in _db.OptionClasses
+            //                          on c.Id equals o.Id
+            //                          select new 
+            //                          {
+            //                              Id = c.Id,
+            //                              Class_Code = c.Class_Code,
+            //                              StudyTime = o.studyTime
+            //                          }
+            //                         ).ToListAsync();
+            // return Ok();
+            
         }
         [HttpGet("{id}", Name="GetClass")]
         public async Task<IActionResult> GetClass(int id) 
@@ -48,6 +72,13 @@ namespace Academy.API.Controllers
             classForAddDto.CreatedBy = User.Identity.Name.ToString();
             // Status = 1 thể hiện cho việc đang mở đăng ký khóa học
             classForAddDto.Status = 1;
+            // var selectedCheck = classForAddDto.StudyTime;
+            // selectedCheck = selectedCheck ?? new string[] { };
+
+
+
+            // var a = classForAddDto.StudyTime;
+            // a = classForAddDto.studyTimeGet[]
             var classToCreate = _mapper.Map<Class>(classForAddDto);
             _repo.Add(classToCreate);
             await _repo.SaveAll();

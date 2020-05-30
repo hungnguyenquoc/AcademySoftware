@@ -11,6 +11,43 @@ export const navItems: INavData[] = [
     }
   },
   {
+    name: 'Hệ Thống',
+    url: '/admin-user',
+    icon: 'icon-user',
+    children: [
+      {
+        name: 'Người dùng',
+        icon: 'icon-fsd',
+        url: '/admin-user/admin-user-manage',
+      },
+      {
+        name: 'Thông tin người dùng',
+        icon: 'icon-fsd',
+        url: '/admin-user/admin-user-edit/:id',
+      },
+      {
+        name: 'Nhóm quyền',
+        icon: 'icon-fsd',
+        url: '/admin-roles/admin-role-group',
+      },
+      {
+        name: 'Chức năng',
+        icon: 'icon-fsd',
+        url: '/admin-roles/admin-role-function'
+      }
+    ]
+  },
+  {
+    name: 'Thông báo',
+    url: '/admin-announcement/admin-announcement-list',
+    icon: 'icon-user',
+  },
+  {
+    name: 'Quản lý học viên',
+    url: '/admin-student/admin-student-list',
+    icon: 'icon-user',
+  },
+  {
     name: 'Quản lý tài khoản',
     url: '/admin-users',
     icon: 'icon-user',

@@ -26,6 +26,8 @@ namespace Academy.API.Data
         public DbSet<CourseCategory> CourseCategories {get;set;}
         public DbSet<OpenRegisterUser> OpenRegisterUsers {get;set;}
 
+        public DbSet<OptionClass> OptionClasses {get;set;}
+        public DbSet<Options> Options {get;set;}
 
         protected override void OnModelCreating(ModelBuilder builder) 
         {
@@ -57,6 +59,20 @@ namespace Academy.API.Data
                 openRegisterUser.HasOne(uc => uc.User)
                     .WithMany(u => u.OpenRegisterUsers)
                     .HasForeignKey(uc => uc.UserId)
+                    .IsRequired();
+            });
+             builder.Entity<OptionClass>(openClasses => 
+            {
+                openClasses.HasKey(uc => new {uc.Class_Id, uc.OptionId});
+
+                openClasses.HasOne(uc => uc.Options)
+                    .WithMany(c => c.OptionClasses)
+                    .HasForeignKey(uc => uc.OptionId)
+                    .IsRequired();
+
+                openClasses.HasOne(uc => uc.Class)
+                    .WithMany(u => u.OptionClasses)
+                    .HasForeignKey(uc => uc.Class_Id)
                     .IsRequired();
             });
             //  builder.Entity<BookingDetail>(bookingDetails => 

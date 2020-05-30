@@ -1,1 +1,20 @@
-<p>major works!</p>
+<table>
+<thead>
+    <tr>
+      <th>STT</th>
+      <th>Tên ngành</th>
+      <th>Mã</th>
+      <th>Mô tả</th>
+      <th>Ngày tạo</th>
+      <th>Được thêm bởi</th>
+      <th>Tình trạng</th>
+      <th>Thao tác</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of majorsList; let i = index">
+      <td> {{ i + 1}} </td>
+      <td> {{ item.maj_Name}}</td>
+    </tr>
+  </tbody>
+</table> 

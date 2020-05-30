@@ -18,6 +18,7 @@ import { AdminProgramsComponent } from './views/admin-programs/admin-programs.co
 import { AdminTemplateComponent } from './views/admin-template/admin-template.component';
 import { AdminCourseDetailComponent } from './views/admin-courses/admin-course-detail/admin-course-detail.component';
 import { AdminCourseUpdateComponent } from './views/admin-courses/admin-course-update/admin-course-update.component';
+import { AdminMajorAddComponent } from './views/admin-major/admin-major-add/admin-major-add.component';
 
 export const routes: Routes = [
   {
@@ -104,6 +105,10 @@ export const routes: Routes = [
         component: AdminMajorComponent
       },
       {
+        path: 'admin-major/admin-major-add/:id',
+        component: AdminMajorAddComponent
+      },
+      {
         path: 'admin-programs',
         component: AdminProgramsComponent
       },
@@ -146,7 +151,24 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
-      }
+      },
+      //  Phần khai báo routing cho các module quản lý.
+      {
+        path: 'admin-user',
+        loadChildren: () => import('./views/admin-user/admin-user.module').then(m => m.AdminUserModule)
+      },
+      {
+        path: 'admin-roles',
+        loadChildren: () => import('./views/admin-roles/admin-roles.module').then(m => m.AdminRolesModule)
+      },
+      {
+        path: 'admin-student',
+        loadChildren: () => import('./views/admin-student/admin-student.module').then(m => m.AdminStudentModule)
+      },
+      {
+        path: 'admin-announcement',
+        loadChildren: () => import('./views/admin-announcement/admin-announcement.module').then(m => m.AdminAnnouncementModule)
+      },
     ]
   },
   { path: '**', component: P404Component }

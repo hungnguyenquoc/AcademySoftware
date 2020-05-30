@@ -5,7 +5,7 @@ export class ClassStudy {
     startTime: Date;
     endTime: Date;
     class_Address: string;
-    studyTime: string;
+    studyTimeGetDay?: string[];
     courseId: number;
     status: number;
     createdDate: Date;

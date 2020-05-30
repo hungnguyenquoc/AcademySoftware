@@ -1,0 +1,33 @@
+<section id="portfolio-section" class="portfolio home-section" >
+  <div class="container">
+    <div class="section-header">
+      <h2>CÁC KHÓA HỌC NỔI BẬT</h2>
+      <p>Được theo học nhiều nhất tại trung tâm
+      </p>
+    </div>
+      <div fxLayout="row wrap" fxLayoutGap="10px">
+        <div style="width: 100%; flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-flow: row wrap; ">
+          <div fxFlex="100" fxFlex.gt-sm="33.3" style="padding: 1%;" *ngFor="let item of coursesList" >
+            <mat-card class="p-0 m-0" >
+              <img mat-card-image src="{{item.couImage}}" style="width: 100%;">
+              <mat-card-content>
+                <h5><strong><a href="">{{item.couName}}</a></strong></h5>
+                <p>
+                  {{item.couDescription}}
+                </p>
+                <mat-divider class="mb-1"></mat-divider>
+                <a mat-raised-button mat-lg-button class="color-button" [routerLink]="['/home/course-detail/', item.id]" routerLinkActive="router-link-active"  >XEM THÊM</a>
+              </mat-card-content>
+            </mat-card>
+         </div>
+        </div>
+      </div>
+      <!-- (click)="viewCourseDetail(item.id)" -->
+    <div class="text-center home-section-action">
+      <button mat-raised-button mat-lg-button color="accent">LOAD MORE</button>
+    </div>
+  </div>
+</section>

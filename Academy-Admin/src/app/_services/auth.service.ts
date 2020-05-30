@@ -13,6 +13,7 @@ export class AuthService {
   baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  currentUser: User;
   confirmEmailUrl = 'http://localhost:4200/#/confirm-email';
   changePasswordUrl = 'test.com';
   constructor(private http: HttpClient) { }
@@ -23,7 +24,11 @@ export class AuthService {
         const user = response;
         if (user) {
           localStorage.setItem('tokenString', user.tokenString);
+          // localStorage.setItem('user', JSON.stringify(user.user));
+
           this.decodedToken = this.jwtHelper.decodeToken(user.tokenString);
+          // this.currentUser = user.user;
+
           console.log(this.decodedToken);
         }
       })
@@ -50,7 +55,6 @@ export class AuthService {
   confirmEmail(user: User) {
     return this.http.post(this.baseUrl + 'confirmemail', user);
   }
-
   //
   loggedIn() {
     const token = localStorage.getItem('tokenString');

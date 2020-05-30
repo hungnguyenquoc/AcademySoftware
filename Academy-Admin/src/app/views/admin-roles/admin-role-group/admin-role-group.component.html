@@ -1,0 +1,68 @@
+<div class="mt-5">
+  <div class="col-md-12">
+    <div class="card card-wrapper">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Quản lý loại quyền</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <button class="btn btn-success mb-3">
+            <i class="fa fa-plus"></i>
+            Thêm tên quyền
+        </button>
+        <form [formGroup]="addForm">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <input [ngClass]="{'is-invalid': addForm.get('name').errors && addForm.get('name').touched}"
+              class="form-control" placeholder="Tên khóa học" formControlName="name">
+              <div class="invalid-feedback" *ngIf="addForm.get('name').touched 
+              && addForm.get('name').hasError('required')">
+                Vui lòng nhập tên quyền
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <button type="reset" class="btn btn-danger">Hủy</button>
+              <button type="button" class="btn btn-success" (click)="addRole()">Lưu</button>
+            </div>
+          </div>
+        </form>
+        <!-- <button class="btn btn-success" (click)="deleteSelected()">Delete</button> -->
+
+        <table id="table" datatable [dtOptions]="dtOptions" data-page-length='5' class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>STT</th>
+              <th>Tên quyền</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rolesList; let i = index">
+              <td><input type="checkbox" data-md-icheck  #checkdelet id="{{item.id}}" name="deletecheck" value="{{item.id}}" (click)="selectID(item.id,$event)" /></td>
+              <td> {{ i + 1}} </td>
+              <td> {{ item.name}}</td>
+              <td>
+                <!-- <a href="" class="mr-2">
+                    <i class="fa fa-eye font-weight-200" aria-hidden="true"
+                      style="color: blue; font-size: 1.2em; font-weight: bold"></i>
+                  </a> -->
+                <button class="btn btn-secondary mr-2">
+                  <i class="fa fa-pencil-square-o font-weight-200" aria-hidden="true"
+                    style="color: green; font-size: 1.2em"></i>
+                </button>
+                <button class="btn btn-danger" (click)="deleteRole(item.id)">
+                  <i class="fa fa-trash" aria-hidden="true"
+                    style="color:white; font-size: 1.2em"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

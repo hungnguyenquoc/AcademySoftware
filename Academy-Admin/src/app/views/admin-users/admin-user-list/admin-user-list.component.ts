@@ -18,7 +18,7 @@ export class AdminUserListComponent implements OnInit {
 
   ngOnInit() {
     this.serviceUser.getAll().subscribe(data => this.usersList = data);
-    this.role.getAll().subscribe(date => this.roleList = date);
+    // this.role.getAll().subscribe(date => this.roleList = date);
     // console.log(this.usersList);
     this.dtOptions = {
       // pagingType: 'full_numbers',

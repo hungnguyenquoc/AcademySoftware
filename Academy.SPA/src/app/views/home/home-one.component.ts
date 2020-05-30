@@ -6,7 +6,8 @@ import { LandingFixService } from '../../shared/services/landing-fix.service';
   template: `<app-header></app-header>
   <app-intro></app-intro>
   <app-introduction></app-introduction>
-  <app-portfolio></app-portfolio>
+  <!-- <app-portfolio></app-portfolio> -->
+  <app-course></app-course>
   <app-services [backgroundGray]="true"></app-services>
   <app-testimonials-carousel></app-testimonials-carousel>
   <app-cta></app-cta>

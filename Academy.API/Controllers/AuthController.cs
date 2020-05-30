@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Web;
 using Microsoft.Extensions.Options;
+using System.Linq;
 
 namespace Academy.API.Controllers
 {
@@ -56,8 +57,12 @@ namespace Academy.API.Controllers
         {
 
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
+            // var roles = userForRegisterDto.Roles.ToArray();
+
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+            // await _userManager.AddToRolesAsync(userToCreate, roles);
+
              //Send Email
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(userToCreate);
             var confirmEmailUrl = Request.Headers["confirmEmailUrl"];//http://localhost:4200/email-confirm
@@ -76,7 +81,9 @@ namespace Academy.API.Controllers
             //
             if(result.Succeeded) {
                 // result =await _userManager.AddToRoleAsync(userToCreate.Id,userForRegisterDto.RoleName);
-                return CreatedAtRoute("GetUser", new {controller = "Users", id = userToCreate.Id}, userToReturn);         
+                return CreatedAtRoute("GetUser", new {controller = "Users", id = userToCreate.Id}, userToReturn);    
+                // return CreatedAtRoute(nameof(UsersController.GetUser),  new { id = userToCreate.Id }, userToCreate);
+     
             }
             return BadRequest(result.Errors);
                 

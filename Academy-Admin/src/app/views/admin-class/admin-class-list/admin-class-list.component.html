@@ -7,9 +7,9 @@
               <h4>Quản lý lớp học</h4>
             </div> 
             <div class="col-md-6 text-right">
-              <button class="btn btn-success" >
+              <button class="btn btn-success" (click)="modal.showModal();" >
                 <i class="fa fa-plus"></i>
-                Thêm lớp học
+                Thêm mới lớp học
               </button>
             </div>
           </div>
@@ -23,15 +23,28 @@
                 <th>Khóa học</th>
                 <th>Khải giảng</th>
                 <th>Kết thúc</th>
-                <th>Địa điểm học</th>
-                <th>Ghi chú</th>
+                <th>Thời gian học</th>
                 <th>Tình trạng</th>
-                <th>Người tạo</th>
                 <th>Thao tác</th>
               </tr>
             </thead>
             <tbody>
-              
+              <tr *ngFor="let item of classesList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ item.class_Code}}</td>
+                <td>
+                  <div *ngFor="let course of coursesList">
+                    <span *ngIf="item.courseId == course.id">{{ course.couName}}</span>
+                  </div>
+                </td> 
+                <td> {{item.startTime |  date: 'dd/MM/yyyy'}}</td>
+                <td> {{item.endTime |  date: 'dd/MM/yyyy'}}</td>
+                <td>{{ item.studyTimeGetDay}}</td>
+                <td>
+                  <span *ngIf=" item.status == 1; else Nu" class="badge badge-success">Active</span>
+                    <ng-template #Nu> <span class="badge badge-danger">Inactive</span></ng-template>
+                </td>                
+              </tr>
             </tbody>
           </table>
         </div>
@@ -39,5 +52,7 @@
     </div>
   </div>
   
-  <!-- <button class="btn btn-primary text-left mb-2" (click)="modal.showModal();" ><i class="fa fa-plus"></i></button>
-  <app-admin-course-add #modal  (itemCreated)="itemCreated($event)"></app-admin-course-add> -->
+  <app-admin-class-add #modal (itemCreated)="itemCreated($event)" ></app-admin-class-add>
+
+
+

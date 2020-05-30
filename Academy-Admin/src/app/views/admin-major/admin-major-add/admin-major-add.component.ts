@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, TemplateRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, TemplateRef, Input } from '@angular/core';
 import { MajorService } from '../../../_services/major.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -18,18 +18,25 @@ export class AdminMajorAddComponent implements OnInit {
   majorList: Major;
   majorsList: Major[];
   modalRef: BsModalRef;
-
+  @Input() major: Major;
   @Output() closeModalEvent = new EventEmitter<boolean>();
 
   constructor(private majorService: MajorService,
              private toastr: ToastrService,
              private fb: FormBuilder, private router: Router,
-             private customValidator: CustomValidationService
+             private customValidator: CustomValidationService,
+             private route: ActivatedRoute
              ) { }
 
   ngOnInit() {
     // this.createAddForm();
     // this.majorService.getMajors().subscribe(data => this.majorsList = data);
+    this.getHero();
+  }
+  getHero(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.majorService.getMajor(id)
+      .subscribe(hero => this.major = hero);
   }
   // createAddForm() {
   //   this.createForm = this.fb.group({

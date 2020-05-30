@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Academy.API.Dtos
@@ -30,7 +31,9 @@ namespace Academy.API.Dtos
 
         public string Phone { get; set; }
         public bool Status { get; set; }
-        public string RoleName { get; set; }
+        // public string RoleName { get; set; }
+        public ICollection<string> Roles { get; set; }
+
         public UserForRegisterDto()
         {
             Created = DateTime.Now;

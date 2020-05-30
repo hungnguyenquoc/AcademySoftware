@@ -101,6 +101,10 @@ import { AdminOpenRegisterAddComponent } from './views/admin-open-registers/admi
 import { AdminOpenRegisterUpdateComponent } from './views/admin-open-registers/admin-open-register-update/admin-open-register-update.component';
 import { AdminClassModule } from './views/admin-class/admin-class.module';
 import { AdminEducationModule } from './views/admin-education/admin-education.module';
+import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { AdminUserModule } from './views/admin-user/admin-user.module';
 
 
 // End Add 3rd Library
@@ -125,6 +129,7 @@ export function tokenGetter() {
     TabsModule.forRoot(),
     ChartsModule,
     AdminClassModule,
+    AdminUserModule,
     AdminEducationModule,
     JwtModule.forRoot({
       config: {
@@ -148,7 +153,11 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FileUploadModule,
     NgxMaskModule.forRoot(),
-    CKEditorModule
+    CKEditorModule,
+    NgxBootstrapMultiselectDropdownModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    MultiselectDropdownModule
+
 
   ],
   declarations: [
@@ -187,6 +196,8 @@ export function tokenGetter() {
     AdminOpenRegistersComponent,
     AdminOpenRegisterAddComponent,
     AdminOpenRegisterUpdateComponent,
+    // import các module quản lý phần admin
+    // AdminUserModul
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [{

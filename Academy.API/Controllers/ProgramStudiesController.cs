@@ -24,6 +24,7 @@ namespace Academy.API.Controllers
             _repo = repo;
         }
         // controller/api/getAll
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetProgramStudies()
         {
@@ -32,6 +33,7 @@ namespace Academy.API.Controllers
             return Ok(programStudiesToReturn);
         }
         //controller/api/getProgramStudy/id
+        [AllowAnonymous]
         [HttpGet("{id}", Name="GetProgramStudy")]
         public async Task<IActionResult> GetProgramStudy(int id) 
         {

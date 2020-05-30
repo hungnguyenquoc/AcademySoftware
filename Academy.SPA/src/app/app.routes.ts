@@ -10,6 +10,10 @@ export const rootRouterConfig: Routes = [
     path: 'home', 
     loadChildren: './views/home/home.module#HomeModule'
   },
+  // {
+  //   path: 'course-detail/id',
+  //   loadChildren: './views/home/course-detail/id'
+  // }
   { 
     path: '**', 
     redirectTo: 'home/one'

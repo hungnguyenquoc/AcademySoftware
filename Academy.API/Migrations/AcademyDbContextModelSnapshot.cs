@@ -87,8 +87,6 @@ namespace Academy.API.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<string>("StudyTime");
-
                     b.Property<string>("UpdatedBy");
 
                     b.Property<DateTime?>("UpdatedDate");
@@ -288,6 +286,32 @@ namespace Academy.API.Migrations
                     b.HasIndex("OpenId");
 
                     b.ToTable("OpenRegisterUsers");
+                });
+
+            modelBuilder.Entity("Academy.API.Models.OptionClass", b =>
+                {
+                    b.Property<int>("Class_Id");
+
+                    b.Property<int>("OptionId");
+
+                    b.HasKey("Class_Id", "OptionId");
+
+                    b.HasIndex("OptionId");
+
+                    b.ToTable("OptionClasses");
+                });
+
+            modelBuilder.Entity("Academy.API.Models.Options", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StudyTimeGetDay");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("Academy.API.Models.Photo", b =>
@@ -583,6 +607,19 @@ namespace Academy.API.Migrations
                     b.HasOne("Academy.API.Models.User", "User")
                         .WithMany("OpenRegisterUsers")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Academy.API.Models.OptionClass", b =>
+                {
+                    b.HasOne("Academy.API.Models.Class", "Class")
+                        .WithMany("OptionClasses")
+                        .HasForeignKey("Class_Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Academy.API.Models.Options", "Options")
+                        .WithMany("OptionClasses")
+                        .HasForeignKey("OptionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

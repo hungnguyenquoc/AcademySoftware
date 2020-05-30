@@ -71,6 +71,7 @@ namespace Academy.API.Controllers
         // }
 
         // get courses
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetCourses()
         {
@@ -101,6 +102,7 @@ namespace Academy.API.Controllers
             var coursesToReturn = _mapper.Map<IEnumerable<CourseForListDto>>(courses);
             return Ok(coursesToReturn);
         }
+        [AllowAnonymous]
         // get course
         [HttpGet("{id}", Name = "GetCourse")]
         public async Task<IActionResult> GetCourse(int id)

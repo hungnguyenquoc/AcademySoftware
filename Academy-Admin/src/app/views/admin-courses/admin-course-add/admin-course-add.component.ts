@@ -60,12 +60,13 @@ export class AdminCourseAddComponent implements OnInit {
   // Hàm thêm khóa học mới
   addCourse() {
     const formData = new FormData();
-    formData.append('file', this.addForm.get('file').value);
+    // formData.append('file', this.addForm.get('file').value);
     formData.append('multipleFiles', this.addForm.get('multipleFiles').value);
     formData.append('couName', this.addForm.get('couName').value);
     formData.append('couCode', this.addForm.get('couCode').value);
     formData.append('couDescription', this.addForm.get('couDescription').value);
     formData.append('couContent', this.addForm.get('couContent').value);
+    formData.append('file', this.addForm.get('file').value);
 
     formData.append('status', this.addForm.get('status').value);
     formData.append('couPrice', this.addForm.get('couPrice').value);

@@ -1,0 +1,124 @@
+<ng-template #itemCreateMdl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Thêm lớp học</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addForm" >
+      <div class="form-row">
+        <div class="form-group col-md-6 ">
+          <!-- Mã lớp học -->
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Mã lớp:</label>
+          <input [ngClass]="{'is-invalid': addForm.get('class_Code').errors && addForm.get('class_Code').touched}"
+            class="form-control" placeholder="Mã lớp" formControlName="class_Code">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('class_Code').hasError('required')">
+              Vui lòng nhập mã lớp học
+            </span>
+          </div>
+        </div>
+        <!-- Chương trình đào tạo -->
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Khóa học
+          </label>
+          <select name="courseId" class="form-control" formControlName="courseId">
+            <option value="">Chọn khóa học</option>
+            <ng-container *ngFor="let item of coursesList">
+              <option value="{{ item.id }}">
+                {{item.couName}}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- Mã lớp học -->
+        <label for="">
+          <span style="color: red" class="font-weight-bold">(*)</span>
+          Ghi chú:</label>
+        <input [ngClass]="{'is-invalid': addForm.get('class_Description').errors && addForm.get('class_Description').touched}"
+          class="form-control" placeholder="Mã lớp" formControlName="class_Description">
+        <div class="invalid-feedback">
+          <span *ngIf="addForm.get('class_Description').hasError('required')">
+            Vui lòng nhập ghi chú
+          </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <!-- Mã lớp học -->
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Ngày bắt đầu:</label>
+          <input [ngClass]="{'is-invalid': addForm.get('startTime').errors && addForm.get('startTime').touched}"
+            class="form-control" placeholder="Mã lớp" formControlName="startTime" bsDatepicker
+            [bsConfig]="dpConfig">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('startTime').hasError('required')">
+              Vui lòng nhập mã lớp học
+            </span>
+          </div>
+        </div>
+        <!--  -->
+        <div class="form-group col-md-6">
+          <!-- Mã lớp học -->
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Ngày kết thúc:</label>
+          <input [ngClass]="{'is-invalid': addForm.get('endTime').errors && addForm.get('endTime').touched}"
+            class="form-control" placeholder="Mã lớp" formControlName="endTime" bsDatepicker
+            [bsConfig]="dpConfig">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('endTime').hasError('required')">
+              Vui lòng nhập ngày kết thúc
+            </span>
+          </div>
+        </div>
+      </div>
+     
+      <!--  -->
+      <!--  -->
+      <div class="form-group">
+        <label for="my-input">Địa điểm học</label>
+        <textarea
+          [ngClass]="{'is-invalid': addForm.get('class_Address').errors && addForm.get('class_Address').touched}"
+          class="form-control" placeholder="Địa điểm học" formControlName="class_Address"></textarea>
+      </div>
+      <!-- <div class="form-group">
+        <div *ngFor="let item of studyTimeCheckbox; let i = index">
+          <label for="my-input">
+          <input type="checkbox" [value]="item.value" (change)="onCheckboxChange($event)">
+            {{item.name}}
+        </label>
+        </div>
+      </div> -->
+      <!-- <div class="form-group">
+        <div>
+          <label for="my-input">Thời gian học</label>
+        </div>
+        <div class="form-check form-check-inline" *ngFor="let control of studyTimeArray.controls; let i = index">
+          <input class="form-check-input" [formControl]="control" type="checkbox"
+            (change)="getSelectedStudyTimeValues()" id="inlineCheckbox{{i}}">
+          <label class="form-check-label" for="inlineCheckbox{{i}}">{{studyTimeCheckbox[i]}}</label>
+        </div>
+        <div>
+          <small *ngIf="studyTimeError && checkStudyTimeControlTouched()">Vui lòng chọn thời gian học</small>
+        </div>
+      </div> -->
+      <input type="hidden" formControlName="status">
+      <input type="hidden" formControlName="optionId">
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="!addForm.valid" class="btn btn-success" (click)="insertForm()" >Lưu</button>
+
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Hủy</button>
+  </div>
+</ng-template>

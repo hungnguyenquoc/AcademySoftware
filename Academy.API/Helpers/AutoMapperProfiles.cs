@@ -55,6 +55,8 @@ namespace Academy.API.Helpers
             CreateMap<ClassForListDto, Class>();
             CreateMap<ClassForDetailedDto, Class>();
             CreateMap<ClassForUpdateDto, Class>();
+            CreateMap<ClassForUpdateDto, Class>();
+            CreateMap<OptionClass, Class>();
 
             // CreateMap<UserForUpdateDto, User>();
             //CreateMap<Photo, PhotoForReturnDto>();

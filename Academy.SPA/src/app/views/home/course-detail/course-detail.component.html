@@ -1,0 +1,96 @@
+<app-header></app-header>
+<!-- bắt đầu hình ảnh giới thiệu khóa học -->
+<section id="intro-section" class="home-intro-section">
+  <div class="container" fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
+    <div fxFlex="80">
+      <h1 class="home-intro-title">BIẾN ƯỚC MƠ THÀNH SỰ THẬT</h1>
+      <div class="home-intro-desc">
+        TRỞ THÀNH CHUYÊN GIA HÀNG ĐẦU CỦA LĨNH VỰC BẠN ĐANG THEO ĐUỔI
+      </div>
+    </div>
+  </div>
+</section>
+<!-- kết thúc hình ảnh giới thiệu khóa học -->
+
+
+<!-- begin trang chi tiết khóa học -->
+
+<!-- bắt đầu phần nội dung chi tiết khóa học -->
+<section id="portfolio-section" class="portfolio home-section" *ngIf="coursesList">
+  <div class="container">
+    <div class="section-header">
+      <h2></h2>
+    </div>
+    <span>{{coursesList.couName}}</span>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="nowrap" fxLayoutGap="30px" style="margin-top: 30px;">
+      <div fxFlex="30">
+        <mat-card class="p-0 m-0">
+          <mat-card-content>
+            <ng-container *ngIf="coursesList.couImage != null">
+              <img src="{{coursesList.couImage}}" alt="">
+            </ng-container>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="70">
+        <mat-card class="p-0 m-0">
+          <mat-card-content>
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Personal data
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Type your name and age
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                  <mat-label>First name</mat-label>
+                  <input matInput>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Age</mat-label>
+                  <input matInput type="number" min="1">
+                </mat-form-field>
+              </mat-expansion-panel>
+              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <h3>Lịch khai giảng</h3>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <table class="table table-bordered table-responsive table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Lớp</th>
+                      <th scope="col">Thời gian học</th>
+                      <th scope="col">Ngày khai giảng</th>
+                      <th scope="col">Địa điểm học</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">LH001</th>
+                      <td>Thứ 3-5-7 (17h - 20h)</td>
+                      <td>1/5/2020</td>
+                      <td>279 Phan huy Ích</td>
+                      <td>
+                        <button class="btn btn-success">Đăng ký</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- kết thúc phần nội dung chi tiết khóa học -->
+<!-- end trang chi tiết khóa học -->

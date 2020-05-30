@@ -12,7 +12,8 @@ import {
   MatInputModule,
   MatRippleModule,
   MatSlideToggleModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatExpansionModule
  } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NguCarouselModule } from '@ngu/carousel';
@@ -40,6 +41,10 @@ import { AllSectionsComponent } from './all-sections.component';
 
 import { WINDOW_PROVIDERS } from '../../shared/helpers/window.helper';
 import { IntroductionComponent } from './introduction/introduction.component';
+import { CourseDetailComponent } from './course-detail/course-detail.component';
+import { CourseComponent } from './course/course.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ClassDetailComponent } from './class-detail/class-detail.component';
 
 
 @NgModule({
@@ -60,7 +65,9 @@ import { IntroductionComponent } from './introduction/introduction.component';
     MatSnackBarModule,
     FlexLayoutModule,
     NguCarouselModule,
-    RouterModule.forChild(HomeRoutes)
+    RouterModule.forChild(HomeRoutes),
+    HttpClientModule,
+    MatExpansionModule
   ],
   declarations: [
     HomeOneComponent,
@@ -80,7 +87,10 @@ import { IntroductionComponent } from './introduction/introduction.component';
     ServicesCarouselComponent, 
     DemoComponent,
     AllSectionsComponent,
-    IntroductionComponent
+    IntroductionComponent,
+    CourseDetailComponent,
+    CourseComponent,
+    ClassDetailComponent
   ],
   providers: [WINDOW_PROVIDERS]
 
