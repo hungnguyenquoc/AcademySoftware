@@ -27,6 +27,7 @@ namespace Academy.API.Controllers
             _mapper = mapper;
         }
         // phương thức get
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetMajors()
         {
@@ -35,6 +36,7 @@ namespace Academy.API.Controllers
             return Ok(majorsToReturn);
         }
         // phương thức get theo id
+        [AllowAnonymous]
         [HttpGet("{id}", Name="GetMajor")]
         public async Task<IActionResult> GetMajor(int id)
         {

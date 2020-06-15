@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Academy.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -68,5 +69,29 @@ namespace Academy.API.Data
             }
             return false;
         }
+
+         public int GetUserMaxID()
+        {
+            int id = _context.Users.Max(c => c.Id);
+            return id;
+        }
+
+        public async Task<User> GetUser(int id)
+        {
+             var course = await _context.Users.FirstOrDefaultAsync( c => c.Id == id);
+            return course;
+        }
+
+       public async Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public void Add<T>(T entity) where T : class
+        {
+            _context.Add(entity);
+
+        }
+
     }
 }

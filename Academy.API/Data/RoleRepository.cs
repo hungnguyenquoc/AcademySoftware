@@ -24,20 +24,31 @@ namespace Academy.API.Data
 
         }
 
-        public Task<Role> GetRole(int id)
+        public async Task<Role> GetRole(int id)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Role>> GetRoles()
-        {
-            var roles = await _context.Roles.ToListAsync();
-            return roles;
+            var roleName = await _context.Roles.FirstOrDefaultAsync(r => r.Id == id);
+            return roleName;
         }
 
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        // public Task<Role> GetRole(int id)
+        // {
+        //     throw new System.NotImplementedException();
+        // }
+
+        // public async Task<IEnumerable<Role>> GetRoles()
+        // {
+        //     var roles = await _context.Roles.ToListAsync();
+        //     return roles;
+        // }
+
+        // public async Task<bool> SaveAll()
+        // {
+        //     return await _context.SaveChangesAsync() > 0;
+        // }
     }
 }

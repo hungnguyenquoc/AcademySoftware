@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Academy.API.Models;
 
 namespace Academy.API.Dtos
 {
@@ -10,8 +12,9 @@ namespace Academy.API.Dtos
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Class_Address { get; set; }
-        public string StudyTime { get; set; }
+        public ICollection<String> StudyTime { get; set; }
         public int CourseId { get; set; }
+        // public Option[] StudyTimeGetDay { get; set; }
         public int Status { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }       

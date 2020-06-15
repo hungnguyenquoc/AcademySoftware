@@ -27,12 +27,17 @@ namespace Academy.API.Helpers
                 {
                     opt.ResolveUsing(d => d.DateOfBirth.CalculateAge());
                 });
-            CreateMap<Photo, PhotosForDetailedDto>();
+            CreateMap<UserForUpdateDto, User>();
             CreateMap<UserForRegisterDto, User>();
+
+            CreateMap<Photo, PhotosForDetailedDto>();
             CreateMap<MajorDto, Major>();
             CreateMap<MajorForUpdateDto, Major>();
             CreateMap<ProgramStudyDto, ProgramStudy>();
+            
             CreateMap<RolesDto, Role>();
+            CreateMap<RoleForUpdateRoleDto, Role>();
+            
             CreateMap<CourseForAddDto, Course>();
             CreateMap<CourseForDetailedDto, Course>();
             CreateMap<CourseForListDto, Course>();
@@ -40,10 +45,15 @@ namespace Academy.API.Helpers
 
             // CreateMap<CourseForListDto, Course>();
             
-            CreateMap<CourseCategoryForAddDto, CourseCategory>();
-            CreateMap<CourseCategoryForDetailedDto, CourseCategory>();
-            CreateMap<CourseCategoryForUpdateDto, CourseCategory>();
-            CreateMap<CourseCategoryForListDto, CourseCategory>();
+            // CreateMap<CourseCategoryForAddDto, CourseCategory>();
+            // CreateMap<CourseCategoryForDetailedDto, CourseCategory>();
+            // CreateMap<CourseCategoryForUpdateDto, CourseCategory>();
+            // CreateMap<CourseCategoryForListDto, CourseCategory>();
+
+            CreateMap<Photo, PhotosForDetailedDto>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
 
 
             CreateMap<OpenRegisterForAddDto, OpenRegister>();
@@ -55,9 +65,21 @@ namespace Academy.API.Helpers
             CreateMap<ClassForListDto, Class>();
             CreateMap<ClassForDetailedDto, Class>();
             CreateMap<ClassForUpdateDto, Class>();
-            CreateMap<ClassForUpdateDto, Class>();
-            CreateMap<OptionClass, Class>();
 
+
+            CreateMap<StudentForAddDto, Student>();
+            CreateMap<DTO, Student>();
+            CreateMap<Student, StudentForListDto>();
+            CreateMap<Student,StudentForDetailedDto>();
+            CreateMap<StudentForUpdateDto,Student>();
+
+            CreateMap<FunctionForListDto, Function>();
+            CreateMap<FunctionForUpdateDto, Function>();
+
+            CreateMap<PermissionForDto, Permission>();
+
+
+            CreateMap<AnnouncementDto, Announcement>();
             // CreateMap<UserForUpdateDto, User>();
             //CreateMap<Photo, PhotoForReturnDto>();
             //CreateMap<PhotoForCreationDto, Photo>();

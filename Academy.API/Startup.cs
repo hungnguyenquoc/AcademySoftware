@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using Academy.API.Data;
 using Academy.API.Dtos;
 using Academy.API.Helpers;
+using Academy.API.Infrastructure;
 using Academy.API.Models;
+using Academy.API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -42,7 +44,8 @@ namespace Academy.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AcademyDbContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AcademyDbContext>(x => 
+                    x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc(options =>
                 {
                     var policy = new AuthorizationPolicyBuilder()
@@ -73,10 +76,12 @@ namespace Academy.API
             builder.AddDefaultTokenProviders();
 
             services.AddCors();
-            //services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             // Mapper.Reset();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
+            // services.AddScoped<LogUserActivity>();
+
             // services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAcademyRepository, AcademyRepository>();
             services.AddScoped<IMajorRepository, MajorRepository>();
@@ -87,6 +92,12 @@ namespace Academy.API
             services.AddScoped<IClassRepository, ClassRepository>();
 
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IFunctionRepository, FunctionRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddScoped<IFunctionService, FunctionService>();
+            services.AddScoped<IFunctionService, FunctionService>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -102,7 +113,7 @@ namespace Academy.API
                 });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
                 options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
                 options.AddPolicy("VipOnly", policy => policy.RequireRole("VIP"));
             });
@@ -147,8 +158,6 @@ namespace Academy.API
 
             //app.UseHttpsRedirection();
             // public void SeedUsers()
-            // seeder.SeedUsers();
-
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseAuthentication();
             app.UseStaticFiles();

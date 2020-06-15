@@ -45,5 +45,8 @@ namespace Academy.API.Models
 
         public virtual IEnumerable<Class> Classes { get; set; }
         public ICollection<OpenRegister> OpenRegisters {get;set;}
+
+        // public virtual IEnumerable<Student> Students { get; set; }
+
     }
 }

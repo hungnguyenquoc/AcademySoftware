@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace Academy.API.Dtos
 {
@@ -18,26 +19,23 @@ namespace Academy.API.Dtos
 
         public DateTime DateOfBirth { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
         public DateTime LastActive { get; set; }
-
+        public string Address { get; set; }
         public string Country { get; set; }
-
-        public string LastName { get; set; }
-
         public string FullName { get; set; }
-
         public string Email { get; set; }
-
         public string Phone { get; set; }
-        public bool Status { get; set; }
-        // public string RoleName { get; set; }
-        public ICollection<string> Roles { get; set; }
+        public int Status { get; set; }
+        public string UserImage { get; set; }
+        public IFormFile File { get; set; }
 
-        public UserForRegisterDto()
-        {
-            Created = DateTime.Now;
-            LastActive = DateTime.Now;
-        }
+        public ICollection<string> Roles { get; set; }
+        // public UserForRegisterDto()
+        // {
+        //     Created = DateTime.Now;
+        //     LastActive = DateTime.Now;
+        // }
 }
 }

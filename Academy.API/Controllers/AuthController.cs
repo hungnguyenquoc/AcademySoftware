@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.Web;
 using Microsoft.Extensions.Options;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Academy.API.Controllers
 {
@@ -33,6 +35,7 @@ namespace Academy.API.Controllers
         private readonly RoleManager<Role> _roleManager;
         private readonly IOptions<EmailOptionsDto> _emailOptions;
         private readonly IEmail _email;
+        private readonly IHostingEnvironment _environment;
 
         public AuthController(IConfiguration config, 
                             IMapper mapper, 
@@ -40,7 +43,9 @@ namespace Academy.API.Controllers
                             SignInManager<User> signInManager,
                             RoleManager<Role> roleManager,
                             IOptions<EmailOptionsDto> emailOptions,
-                            IEmail email)
+                            IEmail email,
+                            IHostingEnvironment environment
+                            )
         {
             _mapper = mapper;
             _userManager = userManager;
@@ -48,45 +53,75 @@ namespace Academy.API.Controllers
             _roleManager = roleManager;
             _emailOptions = emailOptions;
             _email = email;
+            _environment = environment;
             _emailOptions = emailOptions;
             _config = config;
         }
         // Controller Register
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
+            userForRegisterDto.CreatedDate = DateTime.Now;
+            userForRegisterDto.CreatedBy = User.Identity.Name.ToString();
+            // Status = 1 thể hiện cho việc tại khoản đã được kích hoạt
+            userForRegisterDto.Status = 1;
+            // var file = userForRegisterDto.File;
+            // userForRegisterDto.UserImage = "1002_default-avatar.jpg";
+            userForRegisterDto.UserImage = "default-avatar.jpg";
 
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
-            // var roles = userForRegisterDto.Roles.ToArray();
+
+            var roles = userForRegisterDto.Roles.ToArray();
 
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
-            var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
-            // await _userManager.AddToRolesAsync(userToCreate, roles);
 
-             //Send Email
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(userToCreate);
-            var confirmEmailUrl = Request.Headers["confirmEmailUrl"];//http://localhost:4200/email-confirm
-
-            var uriBuilder = new UriBuilder(confirmEmailUrl);
-            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-            query["token"] = token;
+            await _userManager.AddToRolesAsync(userToCreate, roles);
             
-            query["userid"] = userToCreate.Id.ToString();
-            uriBuilder.Query = query.ToString();
-            var urlString = uriBuilder.ToString();
+            //  _repo.Add(userToCreate);
+            // await _repo.SaveAll();
 
-            var emailBody = $"Please confirm your email by clicking on the link below </br>{urlString}";
-            await _email.Send(userForRegisterDto.Email, emailBody, _emailOptions.Value);
+            // int idOfUserAdded = _repo.GetUserMaxID();
 
-            //
+            // if (file != null)
+            // {
+            //     string newFileName = idOfUserAdded + "_" + file.FileName;
+            //     string path = Path.Combine(_environment.ContentRootPath, "Upload", newFileName);
+            //     using (var stream = new FileStream(path, FileMode.Create))
+            //     {
+            //         file.CopyTo(stream);
+            //         userForRegisterDto.UserImage = newFileName;
+            //         userToCreate.UserImage = userForRegisterDto.UserImage;
+            //         var userFromRepo = await _repo.GetUser(idOfUserAdded);
+            //         _mapper.Map(userToCreate, userFromRepo);
+            //         await _repo.SaveAll();
+            //     }
+            // }
+     
+               
+            // var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+            //  //Send Email
+            // var token = await _userManager.GenerateEmailConfirmationTokenAsync(userToCreate);
+            // var confirmEmailUrl = Request.Headers["confirmEmailUrl"];//http://localhost:4200/email-confirm
+
+            // var uriBuilder = new UriBuilder(confirmEmailUrl);
+            // var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            // query["token"] = token;
+            // query["userid"] = userToCreate.Id.ToString();
+            // uriBuilder.Query = query.ToString();
+            // var urlString = uriBuilder.ToString();
+
+            // var emailBody = $"Please confirm your email by clicking on the link below </br>{urlString}";
+            // await _email.Send(userForRegisterDto.Email, emailBody, _emailOptions.Value);
+
+            // //
             if(result.Succeeded) {
                 // result =await _userManager.AddToRoleAsync(userToCreate.Id,userForRegisterDto.RoleName);
-                return CreatedAtRoute("GetUser", new {controller = "Users", id = userToCreate.Id}, userToReturn);    
-                // return CreatedAtRoute(nameof(UsersController.GetUser),  new { id = userToCreate.Id }, userToCreate);
-     
+                // return CreatedAtRoute("GetUser", new {controller = "Users", userToCreate.Id}, userToReturn);     
+                return CreatedAtRoute(nameof(UsersController.GetUser),  new { id = userToCreate.Id }, userToCreate);
             }
             return BadRequest(result.Errors);
-                
+            // return StatusCode(201);
         }
         // Controller ConfirmEmail
         [HttpPost("confirmemail")]
@@ -146,8 +181,7 @@ namespace Academy.API.Controllers
              var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, true);
-                
-            
+                        
             if (result.Succeeded)
             {
                 var appUser = await _userManager.Users
@@ -161,7 +195,7 @@ namespace Academy.API.Controllers
                     user = userToReturn
                 });
             }
-
+            
             return Unauthorized();
             // var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
             // var result = await _signInManager.CheckPasswordSignInAsync(user, userForLoginDto.Password, false);

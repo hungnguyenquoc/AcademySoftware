@@ -16,15 +16,7 @@ namespace Academy.API.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Class_Address { get; set; }
-        // public string StudyTime { get; set; }
-        // public IList<string> StudyTime { get; set; }
-        // public List<OptionClass> StudyTime { get; set; }
-        // public string StudyTime { get; set; }
-        // public List<Options> StudyTimeGetDay { get; set; }
-
-
-        [NotMapped]
-        public string[] studyTimeGet { get; set; }
+        public string StudyTime { get; set; }
         //  [Required]
         // public int BookId { get; set; }
 
@@ -35,10 +27,10 @@ namespace Academy.API.Models
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]
-        public virtual Course Course { get; set; }
-        
+        public virtual Course Course { get; set; }       
         public virtual IEnumerable<BookingCourse> BookingCourse { get; set; }
-
         public ICollection<OptionClass> OptionClasses { get; set; }
+        public virtual IEnumerable<Student> Students { get; set; }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Academy.API.Data
         void Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
-        Task<IEnumerable<Role>> GetRoles();
+        // Task<IEnumerable<Role>> GetRoles();
         Task<Role> GetRole(int id);
     }
 }

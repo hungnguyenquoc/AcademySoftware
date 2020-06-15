@@ -18,22 +18,21 @@ namespace Academy.API.Models
         public string FullName { get; set; }
         public string  Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
-        // public string Email { get; set; }
+        public string MailAddress { get; set; }
         public string MobilePhone { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+        public int Status { get; set; }        
         public DateTime LastActive { get; set; }
+        public string UserImage { get; set; }
         public virtual ICollection<Photo> Photos {get;set;}
         public virtual ICollection<UserRole> UserRoles {get;set;}
-        // public ICollection<OpenRegister> OpenRegisters {get;set;}
+        // public virtual ICollection<AnnouncementUser> AnnouncementUsers {get;set;}
         public ICollection<OpenRegisterUser> OpenRegisterUsers { get; set; }
-
-        // public virtual IEnumerable<Major> Majors { get; set; }
         public virtual IEnumerable<Event> Events { get; set; }
-
-        // public virtual IEnumerable<OpenRegister> OpenRegisters { get; set; }
-
-
-
     }
 }

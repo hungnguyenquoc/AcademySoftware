@@ -15,9 +15,38 @@ namespace Academy.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Academy.API.Models.Announcement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<bool>("HasRead");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Announcements");
+                });
 
             modelBuilder.Entity("Academy.API.Models.BookingCourse", b =>
                 {
@@ -86,6 +115,8 @@ namespace Academy.API.Migrations
                     b.Property<DateTime>("StartTime");
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("StudyTime");
 
                     b.Property<string>("UpdatedBy");
 
@@ -216,6 +247,31 @@ namespace Academy.API.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Academy.API.Models.Function", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DisplayOrder");
+
+                    b.Property<string>("IconCss");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<bool>("Status");
+
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Functions");
+                });
+
             modelBuilder.Entity("Academy.API.Models.Major", b =>
                 {
                     b.Property<int>("Id")
@@ -288,6 +344,19 @@ namespace Academy.API.Migrations
                     b.ToTable("OpenRegisterUsers");
                 });
 
+            modelBuilder.Entity("Academy.API.Models.Option", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("StudyTimeGetDay");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Options");
+                });
+
             modelBuilder.Entity("Academy.API.Models.OptionClass", b =>
                 {
                     b.Property<int>("Class_Id");
@@ -301,17 +370,31 @@ namespace Academy.API.Migrations
                     b.ToTable("OptionClasses");
                 });
 
-            modelBuilder.Entity("Academy.API.Models.Options", b =>
+            modelBuilder.Entity("Academy.API.Models.Permission", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("StudyTimeGetDay");
+                    b.Property<bool>("CanCreate");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("CanDelete");
 
-                    b.ToTable("Options");
+                    b.Property<bool>("CanRead");
+
+                    b.Property<bool>("CanUpdate");
+
+                    b.Property<int>("FunctionId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FunctionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("Academy.API.Models.Photo", b =>
@@ -395,6 +478,49 @@ namespace Academy.API.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
+            modelBuilder.Entity("Academy.API.Models.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Identity_Card");
+
+                    b.Property<string>("Source");
+
+                    b.Property<int>("Status");
+
+                    b.Property<string>("Stu_Code");
+
+                    b.Property<string>("Stu_Email");
+
+                    b.Property<string>("Stu_Facebook");
+
+                    b.Property<string>("Stu_Fullname");
+
+                    b.Property<string>("Stu_Gender");
+
+                    b.Property<string>("Stu_Phone");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("Students");
+                });
+
             modelBuilder.Entity("Academy.API.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -407,6 +533,10 @@ namespace Academy.API.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
 
                     b.Property<DateTime>("DateOfBirth");
 
@@ -427,6 +557,8 @@ namespace Academy.API.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<string>("MailAddress");
+
                     b.Property<string>("MobilePhone");
 
                     b.Property<string>("NormalizedEmail")
@@ -443,7 +575,15 @@ namespace Academy.API.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<int>("Status");
+
                     b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.Property<string>("UserImage");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
@@ -557,6 +697,14 @@ namespace Academy.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Academy.API.Models.Announcement", b =>
+                {
+                    b.HasOne("Academy.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Academy.API.Models.BookingCourse", b =>
                 {
                     b.HasOne("Academy.API.Models.Class", "Class")
@@ -617,9 +765,22 @@ namespace Academy.API.Migrations
                         .HasForeignKey("Class_Id")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Academy.API.Models.Options", "Options")
+                    b.HasOne("Academy.API.Models.Option", "Option")
                         .WithMany("OptionClasses")
                         .HasForeignKey("OptionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Academy.API.Models.Permission", b =>
+                {
+                    b.HasOne("Academy.API.Models.Function", "Function")
+                        .WithMany()
+                        .HasForeignKey("FunctionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Academy.API.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -636,6 +797,14 @@ namespace Academy.API.Migrations
                     b.HasOne("Academy.API.Models.Major", "Major")
                         .WithMany("ProgramStudies")
                         .HasForeignKey("MajorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Academy.API.Models.Student", b =>
+                {
+                    b.HasOne("Academy.API.Models.Class", "Class")
+                        .WithMany("Students")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -9,6 +9,10 @@ namespace Academy.API.Data
         IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>, 
         IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
+        public AcademyDbContext()
+        {
+        }
+
         public AcademyDbContext(DbContextOptions<AcademyDbContext> options) : base(options){}
 
         public DbSet<Course> Courses{get;set;}
@@ -25,14 +29,26 @@ namespace Academy.API.Data
         public DbSet<ProgramStudy> ProgramStudies {get;set;}
         public DbSet<CourseCategory> CourseCategories {get;set;}
         public DbSet<OpenRegisterUser> OpenRegisterUsers {get;set;}
-
+        public DbSet<Option> Options {get;set;}
         public DbSet<OptionClass> OptionClasses {get;set;}
-        public DbSet<Options> Options {get;set;}
-
+        public DbSet<Function> Functions { set; get; }
+        public DbSet<Permission> Permissions { set; get; }   
+        public DbSet<Announcement> Announcements { set; get; }   
+        public DbSet<Student> Students { set; get; }   
         protected override void OnModelCreating(ModelBuilder builder) 
         {
              base.OnModelCreating(builder);
-
+            // builder.Entity<AnnouncementUser>(announce => {
+            //     announce.HasKey(au => new {au.UserId, au.AnnouncementId});
+            //     announce.HasOne(au => au.User)
+            //             .WithMany(u => u.AnnouncementUsers)
+            //             .HasForeignKey(au => au.UserId)
+            //             .IsRequired();
+            //     announce.HasOne(au => au.Announcement)
+            //             .WithMany(u => u.AnnouncementUsers)
+            //             .HasForeignKey(au => au.AnnouncementId)
+            //             .IsRequired();
+            // });
             builder.Entity<UserRole>(userRole => 
             {
                 userRole.HasKey(ur => new {ur.UserId, ur.RoleId});
@@ -61,11 +77,11 @@ namespace Academy.API.Data
                     .HasForeignKey(uc => uc.UserId)
                     .IsRequired();
             });
-             builder.Entity<OptionClass>(openClasses => 
+              builder.Entity<OptionClass>(openClasses => 
             {
                 openClasses.HasKey(uc => new {uc.Class_Id, uc.OptionId});
 
-                openClasses.HasOne(uc => uc.Options)
+                openClasses.HasOne(uc => uc.Option)
                     .WithMany(c => c.OptionClasses)
                     .HasForeignKey(uc => uc.OptionId)
                     .IsRequired();

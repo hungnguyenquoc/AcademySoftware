@@ -93,11 +93,6 @@ namespace Academy.API.Controllers
                     course.CouImage = BaseURL.GetBaseUrl(Request) + "/Upload/" + course.CouImage;
                     course.CouMoreImages = BaseURL.GetBaseUrl(Request) + "/Upload/" + course.CouMoreImages;
                 }
-                // if ((course.CouImage != null) || (course.CouMoreImages != null))
-                // {
-                //     course.CouImage = BaseURL.GetBaseUrl(Request) + "/Upload/" + course.CouImage;
-                //     course.CouMoreImages = BaseURL.GetBaseUrl(Request) + "/Upload/" + course.CouMoreImages;
-                // }
             }
             var coursesToReturn = _mapper.Map<IEnumerable<CourseForListDto>>(courses);
             return Ok(coursesToReturn);

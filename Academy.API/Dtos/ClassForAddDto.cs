@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Academy.API.Models;
 
@@ -13,14 +12,12 @@ namespace Academy.API.Dtos
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public string Class_Address { get; set; }
-        // public string[] StudyTime { get; set; }
-        public OptionClass[] StudyTime { get; set; }
-                // public OptionClass[] StudyTime { get; set; }
-
+        // public string StudyTime { get; set; }
         public int CourseId { get; set; }
+        public ICollection<string> StudyTime { get; set; }
+        // public Option[] StudyTimeGetDay { get; set; }
         public int Status { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        // public string[] studyTimeGet {get;set;}
     }
 }

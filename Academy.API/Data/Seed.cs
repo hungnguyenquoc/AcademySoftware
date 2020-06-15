@@ -8,26 +8,26 @@ namespace Academy.API.Data
 {
     public class Seed
     {
-        private readonly UserManager<User> _userManager;
+        // private readonly UserManager<User> _userManager;
 
-        public Seed(UserManager<User> userManager)
-        {
-            _userManager = userManager;
-        }
+        // public Seed(UserManager<User> userManager)
+        // {
+        //     _userManager = userManager;
+        // }
 
-        public void SeedUsers()
-        {
-            if (!_userManager.Users.Any())
-            {
-                var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
-                var users = JsonConvert.DeserializeObject<List<User>>(userData);
-                foreach (var user in users)
-                {
-                    _userManager.CreateAsync(user,"password").Wait();
-                }
-            }
+        // public void SeedUsers()
+        // {
+        //     if (!_userManager.Users.Any())
+        //     {
+        //         var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+        //         var users = JsonConvert.DeserializeObject<List<User>>(userData);
+        //         foreach (var user in users)
+        //         {
+        //             _userManager.CreateAsync(user,"password").Wait();
+        //         }
+        //     }
 
-        }
+        // }
         // private readonly UserManager<User> _userManager;
         // private readonly RoleManager<Role> _roleManager;
 
@@ -73,7 +73,7 @@ namespace Academy.API.Data
 
         //         }
         //     }
-        // }
+        }
         // private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         // {
         //     using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -84,4 +84,4 @@ namespace Academy.API.Data
         // }
 
     }
-}
+// }
