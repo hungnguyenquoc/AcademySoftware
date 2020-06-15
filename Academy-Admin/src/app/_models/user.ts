@@ -1,6 +1,7 @@
 import { Photo } from './photo';
 
 export interface User {
+    file: File;
     id: number;
     username: string;
     knownAs: string;
@@ -11,8 +12,9 @@ export interface User {
     photoUrl: string;
     city: string;
     country: string;
-    lastname: string;
-    fullname: string;
+    fullName: string;
+    address: string;
+    dateOfBirth: Date;
     email: string;
     phone: string;
     status: boolean;
@@ -20,4 +22,6 @@ export interface User {
     introduction?: string;
     lookingFor?: string;
     photos ?: Photo[];
+    userImage: string;
+    File: File;
 }

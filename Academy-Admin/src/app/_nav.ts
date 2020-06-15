@@ -21,11 +21,6 @@ export const navItems: INavData[] = [
         url: '/admin-user/admin-user-manage',
       },
       {
-        name: 'Thông tin người dùng',
-        icon: 'icon-fsd',
-        url: '/admin-user/admin-user-edit/:id',
-      },
-      {
         name: 'Nhóm quyền',
         icon: 'icon-fsd',
         url: '/admin-roles/admin-role-group',
@@ -37,6 +32,17 @@ export const navItems: INavData[] = [
       }
     ]
   },
+  {
+    name: 'Quản lý lớp học',
+    url: '/admin-class',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'Danh sách lớp học',
+        url: '/admin-class/admin-class-list',
+        icon: 'icon-puzzle'
+      }]
+    },
   {
     name: 'Thông báo',
     url: '/admin-announcement/admin-announcement-list',
@@ -56,17 +62,6 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Đào tạo'
   },
-  {
-    name: 'Quản lý lớp học',
-    url: '/admin-class',
-    icon: 'icon-puzzle',
-    children: [
-      {
-        name: 'Danh sách lớp học',
-        url: '/admin-class/admin-class-list',
-        icon: 'icon-puzzle'
-      }]
-    },
   {
     name: 'Quản lý ngành học  ',
     url: '/admin-major',

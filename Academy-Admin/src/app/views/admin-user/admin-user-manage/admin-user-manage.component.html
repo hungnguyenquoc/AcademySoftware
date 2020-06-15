@@ -1,22 +1,30 @@
+
+
+
+
 <div class="mt-5">
   <div class="col-md-12">
     <div class="card card-wrapper">
       <div class="card-header">
         <div class="row">
           <div class="col-md-6">
-            <h4>Quản lý tài khoản</h4>
+            <h4>Danh sách tài khoản người dùng</h4>
           </div>
           <div class="col-md-6 text-right">
-            <button class="btn btn-success" (click)="modal.showModal();" >
-                <i class="fa fa-plus"></i>
-                Thêm tài khoản
-              </button>
+            <button class="btn btn-primary" (click)="modal.showModal();">
+              <i class="fa fa-plus"></i>
+              Thêm tài khoản
+            </button>
+            <button class="btn btn-success" (click)="ExportTOExcel()" title="Xuất excel danh sách tài khoản">
+              <i class="fa fa-file-excel-o "></i>
+              Xuất excel
+            </button>
           </div>
         </div>
       </div>
       <div class="card-body">
         <table id="table" datatable [dtOptions]="dtOptions" data-page-length='5'
-          class="table table-bordered table-striped table-hover">
+          class="table table-bordered table-striped table-hover" #TABLE #table>
           <thead>
             <tr>
               <th>STT</th>
@@ -32,11 +40,12 @@
             <tr *ngFor="let item of usersList; let i = index">
               <td> {{ i + 1}} </td>
               <td> {{ item.username}}</td>
-              <td> {{ item.fullname}}</td>
+              <td> {{ item.fullName}}</td>
+              <td>{{ item.address}}</td>
               <td> {{ item.createdDate | date: 'dd/MM/yyyy'}}</td>
-              <td> </td>
               <td>
-                <span class="badge badge-success">{{ item.status}}</span>
+                <span *ngIf="item.status == 1; else Nu" class="badge badge-success">Đang hoạt động</span>
+                <ng-template #Nu> <span class="badge badge-danger">Khóa</span></ng-template>
               </td>
               <td class="text-center">
                 <a href="" class="mr-2">

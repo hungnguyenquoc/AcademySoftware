@@ -6,12 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule, BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DataTablesModule } from 'angular-datatables';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-import { AdminUserAddComponent } from './admin-user-add/admin-user-add.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, TabsModule } from 'ngx-bootstrap';
 import { AdminUserAddNewComponent } from './admin-user-add-new/admin-user-add-new.component';
 import { AdminUserEditComponent } from './admin-user-edit/admin-user-edit.component';
-
 
 
 @NgModule({
@@ -25,7 +23,8 @@ import { AdminUserEditComponent } from './admin-user-edit/admin-user-edit.compon
     BsDatepickerModule.forRoot(),
     DataTablesModule,
     // ModalModule.forRoot(),
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    [TabsModule.forRoot()]
   ],
   exports: [ AdminUserManageComponent, AdminUserAddNewComponent, AdminUserEditComponent],
   providers: [

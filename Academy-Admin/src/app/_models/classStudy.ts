@@ -6,6 +6,7 @@ export class ClassStudy {
     endTime: Date;
     class_Address: string;
     studyTimeGetDay?: string[];
+    optionId: any;
     courseId: number;
     status: number;
     createdDate: Date;
@@ -13,3 +14,4 @@ export class ClassStudy {
     updatedDate: Date;
     updatedBy: string;
 }
+

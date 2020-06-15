@@ -15,6 +15,7 @@ export class ApiService {
     courses: `${this.baseUrl}courses`,
     openregisters: `${this.baseUrl}openregisters`,
     classes: `${this.baseUrl}classes`,
+    students: `${this.baseUrl}students`
     // coursecategories: `${this.baseUrl}coursecategories`
   };
 }

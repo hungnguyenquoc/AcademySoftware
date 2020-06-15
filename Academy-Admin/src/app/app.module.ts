@@ -44,7 +44,7 @@ import { AppRoutingModule } from './app.routing';
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from './_services/auth.service';
 import { AuthGuard } from './_guards/auth.guard';
@@ -105,6 +105,12 @@ import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { AdminUserModule } from './views/admin-user/admin-user.module';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+// import * as xlsx from 'xlsx';
+// import library ant design
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { ChartsModule } from 'ng2-charts';
 
 
 // End Add 3rd Library
@@ -127,7 +133,6 @@ export function tokenGetter() {
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule,
     AdminClassModule,
     AdminUserModule,
     AdminEducationModule,
@@ -156,7 +161,12 @@ export function tokenGetter() {
     CKEditorModule,
     NgxBootstrapMultiselectDropdownModule,
     NgMultiSelectDropDownModule.forRoot(),
-    MultiselectDropdownModule
+    MultiselectDropdownModule,
+    // library ant design
+    NzTabsModule,
+    NzPaginationModule,
+    ChartsModule
+
 
 
   ],
@@ -217,6 +227,7 @@ export function tokenGetter() {
   ProgramStudyDirective,
   BsModalRef,
   CurrencyPipe,
+  MemberEditResolver
   ],
   bootstrap: [ AppComponent ],
   entryComponents: [

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminUserManageComponent } from './admin-user-manage/admin-user-manage.component';
 import { AdminUserEditComponent } from './admin-user-edit/admin-user-edit.component';
+import { MemberEditResolver } from '../../_resolvers/member-edit.resolver';
 
 const routes: Routes = [
   {
@@ -21,13 +22,7 @@ const routes: Routes = [
       {
         path: 'admin-user-edit',
         component: AdminUserEditComponent,
-        data: {
-          title: 'Buttons'
-        }
-      },
-      {
-        path: 'admin-user-edit/:id',
-        component: AdminUserEditComponent,
+        resolve: {user: MemberEditResolver},
         data: {
           title: 'Buttons'
         }

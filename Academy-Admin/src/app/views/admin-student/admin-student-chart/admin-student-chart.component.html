@@ -1,0 +1,24 @@
+
+<div>
+    <div>
+      <div class="chart">
+        <canvas baseChart
+          *ngIf="barChartData && barChartData.length > 0"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [legend]="barChartLegend"
+          [options]="barChartOptions"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+            <!-- [options]="barChartOptions" -->
+
+            <!-- [legend]="barChartLegend" -->
+
+                    <!-- [datasets]="barChartData"
+                    [labels]="barChartLabels" -->
+
+            <!-- [plugins]="barChartPlugins" -->

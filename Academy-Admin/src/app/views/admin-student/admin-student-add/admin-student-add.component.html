@@ -1,0 +1,160 @@
+<ng-template #itemCreateMdl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Thêm học viên</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addForm">
+      <div class="form-row">
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Mã học viên:</label>
+          <input [ngClass]="{'is-invalid': addForm.get('stu_Code').errors && addForm.get('stu_Code').touched}"
+            class="form-control" placeholder="Mã lớp" formControlName="stu_Code">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('stu_Code').hasError('required')">
+              Vui lòng nhập mã học viên
+            </span>
+          </div>
+        </div>
+        <!-- Lớp -->
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Lớp học
+          </label>
+          <select name="courseId" class="form-control" formControlName="classId">
+            <option value="">Chọn khóa học</option>
+            <ng-container *ngFor="let item of classesList">
+              <option value="{{ item.id }}">
+                {{item.class_Code}}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="my-input">Họ và tên</label>
+        <input [ngClass]="{'is-invalid': addForm.get('stu_Fullname').errors && addForm.get('stu_Fullname').touched}"
+          class="form-control" placeholder="Họ và tên" formControlName="stu_Fullname">
+        <div class="invalid-feedback">
+          <span *ngIf="addForm.get('stu_Fullname').hasError('required')">
+            Vui lòng nhập mã tên học viên
+          </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="">Giới tính</label>
+          <select name="" id="" formControlName="stu_Gender" class="form-control">
+            <option *ngFor="let genderControl of GenderControl" [ngValue]="genderControl ">{{genderControl}}</option>
+          </select>
+        </div>
+        <!-- <div class="form-group col-md-6">
+          <label for="">Ngày sinh</label>
+          <input [ngClass]="{'is-invalid': addForm.get('dateOfBirth').errors && addForm.get('dateOfBirth').touched}"
+          class="form-control" placeholder="Ngày tháng, năm, sinh" formControlName="dateOfBirth" bsDatepicker
+          [bsConfig]="dpConfig">
+        <div class="invalid-feedback">
+          <span *ngIf="addForm.get('dateOfBirth').hasError('required')">
+            Vui lòng nhập ngày tháng, năm, sinh
+          </span>
+        </div>
+        </div> -->
+        <!-- <div class="form-group col-md-6">
+          <label for="">Ngày sinh</label>
+          <input [ngClass]="{'is-invalid': addForm.get('dateOfBirth').errors && addForm.get('dateOfBirth').touched}"
+            class="form-control" placeholder="Ngày tháng, năm, sinh" formControlName="dateOfBirth" bsDatepicker
+            [bsConfig]="dpConfig">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('dateOfBirth').hasError('required')">
+              Vui lòng nhập ngày tháng, năm, sinh
+            </span>
+          </div>
+        </div> -->
+      </div>
+      <!-- Ảnh chứng minh nhân dân -->
+      <label for="">Ảnh đại diện khóa học:</label>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="image-preview mb-3" *ngIf="previewUrl">
+            <img [src]="previewUrl" height="200" width="300" />
+          </div>
+          <div class="image-preview mb-3" *ngIf="!previewUrl">
+            <img src="../../../assets/img/avatars/1.jpg" height="200" width="300" />
+          </div>
+        </div>
+        <input type="file" name="file" (change)="onFileSelect($event)" class="btn btn-success" />
+      </div>
+      <!-- <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="my-input">Ảnh CMND:</label>
+          <input type="file" name="file" (change)="onFileSelect($event)" class="btn btn-success" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">Ảnh hiển thị</label>
+          <div class="image-preview mb-3" *ngIf="!previewUrl">
+            <img src="../../../assets/img/avatars/1.jpg" height="200" width="300" />
+          </div>
+        </div>
+      </div> -->
+      <!-- Số điện thoại và Email -->
+      <div class="form-row">
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Số điện thoại</label>
+          <input [ngClass]="{'is-invalid': addForm.get('stu_Phone').errors && addForm.get('stu_Phone').touched}"
+            class="form-control" placeholder="Mã lớp" formControlName="stu_Phone">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('stu_Phone').hasError('required')">
+              Vui lòng nhập số điện thoại
+            </span>
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Email</label>
+          <input [ngClass]="{'is-invalid': addForm.get('stu_Email').errors && addForm.get('stu_Email').touched}"
+            class="form-control" placeholder="Mã lớp" formControlName="stu_Email" type="email">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('stu_Email').hasError('required')">
+              Vui lòng nhập số email
+            </span>
+          </div>
+        </div>
+      </div>
+        <!-- Link facebook cá nhân -->
+        <div class="form-group">
+          <label for="my-input">Facebook học viên</label>
+          <input [ngClass]="{'is-invalid': addForm.get('stu_Facebook').errors && addForm.get('stu_Facebook').touched}"
+            class="form-control" placeholder="Họ và tên" formControlName="stu_Facebook">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('stu_Facebook').hasError('required')">
+              Vui lòng nhập facebook học viên
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="my-input">Nguồn</label>
+          <input [ngClass]="{'is-invalid': addForm.get('source').errors && addForm.get('source').touched}"
+            class="form-control" placeholder="Nguồn" formControlName="source">
+          <div class="invalid-feedback">
+            <span *ngIf="addForm.get('source').hasError('required')">
+              Vui lòng nhập nguồn 
+            </span>
+          </div>
+        </div>
+      <input type="hidden" formControlName="status">
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="!addForm.valid" class="btn btn-success" (click)="addStudent()" >Lưu</button>
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">Hủy</button>
+  </div>
+</ng-template>

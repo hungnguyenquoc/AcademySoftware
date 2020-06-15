@@ -8,6 +8,8 @@ import { CustomValidationService } from '../../../_services/custom-validation.se
 import { Course } from '../../../_models/course';
 import { ClassStudy } from '../../../_models/classStudy';
 import Swal from 'sweetalert2';
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { Option } from '../../../_models/option';
 
 @Component({
   selector: 'app-admin-class-add',
@@ -15,12 +17,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-class-add.component.css']
 })
 export class AdminClassAddComponent implements OnInit {
-
   @Output() itemCreated = new EventEmitter<any>();
   @ViewChild('itemCreateMdl', {static: false }) itemCreateMdl: ElementRef;
   modalRef: BsModalRef;
   coursesList: Course[];
   classesList: ClassStudy[];
+  optionsList: Option[];
   addForm: FormGroup;
 
   disabled = false;
@@ -32,19 +34,20 @@ export class AdminClassAddComponent implements OnInit {
   ];
   selectedItems: Array<any> = [];
   dropdownSettings: any = {};
-
-  // studyTime = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
-  
-  // studyTimeCheckbox: Array<String> = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
-  studyTimeCheckbox: Array<any> = [
-    { name: 'Thứ 2', value: 't2'},
-    { name: 'Thứ 3', value: 't3'},
-    { name: 'Thứ 4', value: 't4'},
-  ];
+  options: string[] = [];
+  allOptions: IMultiSelectOption [] = [];
+  studyTime = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+  studyTimeCheckbox: Array<String> = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'];
+  selectedStudyTimeValues = [];
+  // studyTimeCheckbox: Array<any> = [
+  //   { name: 'Thứ 2', value: 't2'},
+  //   { name: 'Thứ 3', value: 't3'},
+  //   { name: 'Thứ 4', value: 't4'},
+  // ];
   // ];
 
   // selectedStudyTimeValues = [];
-  // studyTimeError: Boolean = true;
+  studyTimeError: Boolean = true;
   public dpConfig: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
   constructor(private modalService: BsModalService,
@@ -61,14 +64,30 @@ export class AdminClassAddComponent implements OnInit {
 
     this.courseService.getCourses().subscribe(data => this.coursesList = data);
     this.createAddForm();
-
+    this.loadOptions();
+    // this.classStudyService.getOption().subscribe(date => this.optionsList = date);
+  }
+  //
+  loadOptions() {
+    this.classStudyService.getOption().subscribe((response: Option[]) => {
+      this.allOptions = [];
+      for (const option of response) {
+        this.allOptions.push({id: option.studyTimeGetDay, name: option.studyTimeGetDay});
+      }
+    });
+    // this.roleService.getAll().subscribe((response: Role[]) => {
+    //   this.allRoles = [];
+    //   for ( const role of response) {
+    //     this.allRoles.push({id: role.name, name: role.name});
+    //   }
+    // });
   }
   //
   showModal() {
     this.modalRef = this.modalService.show(this.itemCreateMdl,  { class: 'modal-lg'});
     this.createAddForm();
   }
-  insertForm(optionId) {
+  insertForm(optionId: any) {
     console.log(this.classesList);
     if (this.addForm.valid) {
       this.classesList = Object.assign({}, this.addForm.value);
@@ -88,38 +107,39 @@ export class AdminClassAddComponent implements OnInit {
       startTime: [null, Validators.required],
       endTime: [null, Validators.required],
       class_Address: ['', Validators.required],
+      studyTime: this.addStudyTimeControls(),
       // studyTimeGetDay:  this.fb.array([]),
-      courseId: null,
+      courseId: 1,
       status: 1,
-      optionId: 1,
+      optionId: [null, this.allOptions]
     });
   }
   //
-  onCheckboxChange(e) {
-    const studyTime: FormArray = this.addForm.get('studyTimeGetDay') as FormArray;
-    if (e.target.checked) {
-      studyTime.push(new FormControl(e.target.value));
-    } else {
-      let i = 0;
-      studyTime.controls.forEach((item: FormControl) => {
-        if (item.value === e.target.value) {
-          studyTime.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
-  }
+  // onCheckboxChange(e) {
+  //   const studyTime: FormArray = this.addForm.get('studyTimeGetDay') as FormArray;
+  //   if (e.target.checked) {
+  //     studyTime.push(new FormControl(e.target.value));
+  //   } else {
+  //     let i = 0;
+  //     studyTime.controls.forEach((item: FormControl) => {
+  //       if (item.value === e.target.value) {
+  //         studyTime.removeAt(i);
+  //         return;
+  //       }
+  //       i++;
+  //     });
+  //   }
+  // }
   refreshList() {
     this.classStudyService.getClasses().subscribe(data => this.classesList = data);
   }
   //
-  // addStudyTimeControls() {
-  //   const arr = this.studyTimeCheckbox.map(element => {
-  //     return this.fb.control(false);
-  //   });
-  //   return this.fb.array(arr);
-  // }
+  addStudyTimeControls() {
+    const arr = this.studyTimeCheckbox.map(element => {
+      return this.fb.control(false);
+    });
+    return this.fb.array(arr);
+  }
   //
   get studyTimeArray() {
     return <FormArray>this.addForm.get('studyTime');
@@ -135,15 +155,16 @@ export class AdminClassAddComponent implements OnInit {
     return studyTime;
   }
   //
-  // getSelectedStudyTimeValues() {
-  //   this.selectedStudyTimeValues = [];
-  //   this.studyTimeArray.controls.forEach((control, i) => {
-  //     if (control.value) {
-  //       this.selectedStudyTimeValues.push(this.studyTimeCheckbox[i]);
-  //     }
-  //   });
-  //   this.studyTimeError = this.selectedStudyTimeValues.length > 0 ? false : true;
-  // }
+  getSelectedStudyTimeValues() {
+    this.selectedStudyTimeValues = [];
+    this.studyTimeArray.controls.forEach((control, i) => {
+      if (control.value) {
+        this.selectedStudyTimeValues.push(this.studyTimeCheckbox[i]);
+      }
+    });
+    this.studyTimeError = this.selectedStudyTimeValues.length > 0 ? false : true;
+    console.log(this.selectedStudyTimeValues);
+  }
 
 
  

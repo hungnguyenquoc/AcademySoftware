@@ -79,7 +79,6 @@ export class AdminUserAddNewComponent implements OnInit {
   // // tạo form đăng ký
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      lastname: ['', Validators.required],
       fullname: ['', Validators.required],
       country: ['', Validators.required],
       phone: ['', Validators.required],

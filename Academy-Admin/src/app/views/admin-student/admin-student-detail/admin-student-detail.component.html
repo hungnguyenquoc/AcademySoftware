@@ -1,0 +1,97 @@
+<ng-template #itemUpdateMdl>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Thông tin sinh viên</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-row">
+        <!-- Mã học viên -->
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Mã học viên:</label>
+          <input type="text" [(ngModel)]="student.stu_Code" class="form-control" name="stu_Code" readonly>
+        </div>
+        <!-- Tên học viên -->
+        <div class="form-group col-md-6">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Tên học viên:</label>
+          <input type="text" [(ngModel)]="student.stu_Fullname" class="form-control" name="stu_Fullname" readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="">Giới tính</label>
+          <input class="form-control" name="stu_Gender" [(ngModel)]="student.stu_Gender" readonly>
+        </div>
+        <!-- Lớp -->
+        <div class="form-group col-md-6 ">
+          <label for="">Chương trình học</label>
+          <select name="courseId" class="form-control" [(ngModel)]="student.courseId" readonly>
+            <option value="">Chọn tên chương trình</option>
+            <ng-container *ngFor="let item of classesList">
+              <option value="{{ item.id }}">
+                {{item.class_Code}}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <!--  -->
+      <div class="form-row">
+        <!-- Mã học viên -->
+        <div class="form-group col-md-6 ">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Số điện thoại:</label>
+          <input type="text" [(ngModel)]="student.stu_Phone" class="form-control" name="stu_Phone" readonly>
+        </div>
+        <!-- Tên học viên -->
+        <div class="form-group col-md-6">
+          <label for="">
+            <span style="color: red" class="font-weight-bold">(*)</span>
+            Email:</label>
+          <input type="text" [(ngModel)]="student.stu_Email" class="form-control" name="stu_Email" readonly>
+        </div>
+      </div>
+      <!-- facebook -->
+      <div class="form-group">
+        <label for="my-input">Tài khoản facebook</label>
+        <input type="text" [(ngModel)]="student.stu_Facebook" class="form-control" name="stu_Facebook" readonly>
+      </div>
+      <!-- Ảnh chứng minh nhân dân -->
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="">Ảnh chứng minh</label>
+          <div class="image-preview mb-3" *ngIf="!previewUrl">
+            <img src="{{student.identity_Card}}" height="200" width="300" name="identity_Card"
+              [(ngModel)]="student.identity_Card" />
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">Người tạo</label>
+          <input type="text" [(ngModel)]="student.createdBy" class="form-control" name="createdBy" readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="">Tình trạng</label>
+          <br>
+          <span *ngIf="student.status === 1; else Nu" class="badge badge-warning">Chưa duyệt</span>
+          <ng-template #Nu> <span style="color: red;">Đang bán</span></ng-template>       
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">Nguồn</label>
+          <input type="text" [(ngModel)]="student.source" class="form-control" name="source">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Đóng</button>
+  </div>
+</ng-template>

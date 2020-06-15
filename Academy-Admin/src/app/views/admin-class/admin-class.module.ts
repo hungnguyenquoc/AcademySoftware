@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     NgxBootstrapMultiselectDropdownModule,
+    MultiselectDropdownModule
   ],
   exports: [
     AdminClassListComponent, AdminClassAddComponent

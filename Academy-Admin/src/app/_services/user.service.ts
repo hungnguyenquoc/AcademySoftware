@@ -23,9 +23,12 @@ export class UserService {
   getAll(): Observable< User> {
     return this.http.get< User>(this.api.url.users, httpOptions);
   }
-  getUserForId(id): Observable<User> {
-    return this.http.get<User>(this.api.url.users + '/' + id, httpOptions);
+  getUser(id): Observable<User> {
+    return this.http.get<User>(this.api.url.users + '/' + id);
   }
+  // getUserForId(id): Observable<User> {
+  //   return this.http.get<User>(this.api.url.users + '/' + id, httpOptions);
+  // }
   updateUser(id, model: any) {
     return this.http.put(this.api.url.users + '/' + id, model, httpOptions);
   }

@@ -1,6 +1,6 @@
 <ng-template #itemCreateMdl>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Thêm lớp học</h4>
+      <h4 class="modal-title pull-left">Thêm tài khoản</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -8,28 +8,16 @@
     <div class="modal-body">
       <!-- (ngSubmit)="register()" -->
       <form [formGroup]="registerForm"  class="form-horizontal">
-        <div class="form-row">
-          <div class="form-group col-md-6 ">
-            <!-- Label Họ -->
-            <label for="">Họ</label>
-            <input [ngClass]="{'is-invalid': registerForm.get('lastname').errors && registerForm.get('lastname').touched}"
-              class="form-control" placeholder="Họ" formControlName="lastname">
-            <div class="invalid-feedback" *ngIf="registerForm.get('lastname').touched 
-            && registerForm.get('lastname').hasError('required')">
-              Vui lòng nhập họ
-            </div>
-          </div>
           <!-- Tên -->
-          <div class="form-group col-md-6">
-            <label for="">Tên</label>
+          <div class="form-group">
+            <label for="">Họ và tên</label>
             <input [ngClass]="{'is-invalid': registerForm.get('fullname').errors && registerForm.get('fullname').touched}"
-              class="form-control" placeholder="Tên" formControlName="fullname">
+              class="form-control" placeholder="Họ và Tên" formControlName="fullname">
             <div class="invalid-feedback" *ngIf="registerForm.get('fullname').touched 
             && registerForm.get('fullname').hasError('required')">
-              Vui lòng nhập tên
+              Vui lòng nhập họ và tên
             </div>
           </div>
-        </div>
         <!-- Địa chỉ -->
         <div class="form-group">
           <label for="">Địa chỉ</label>

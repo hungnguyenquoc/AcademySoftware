@@ -1,0 +1,127 @@
+<div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Nhập từ khóa bạn muốn tìm kiếm" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">Tìm kiếm</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-right">
+          <button class="btn btn-success" (click)="modal.showModal();">
+            <i class="fa fa-plus"></i>
+            Thêm mới
+          </button>
+          <button class="btn btn-secondary" title="Refresh">
+            <i class="fa fa-refresh"></i>
+            Tải lại
+          </button>
+          <button class="btn btn-success" title="Xuất excel danh sách học viên">
+            <i class="fa fa-file-excel-o "></i>
+            Xuất
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <nz-table #sortTable [nzData]="studentsList" nzBordered [nzPageSize] = "4" [nzPageSizeOptions]= [5,10]>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Họ và Tên</th>
+            <!-- <th>Họ và Tên</th> -->
+            <th>Lớp</th>
+            <th>Email</th>
+            <th>Ngày đăng ký</th>
+            <th>Hình CMND</th>
+            <th>Facebook</th>
+            <th>Tình trạng</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of sortTable.data; let i = index">
+            <td>{{ i + 1}}</td>
+            <td>{{data.stu_Code}}</td>
+            <td>
+              <div *ngFor="let class of classesList">
+                <span *ngIf="data.classId == class.id">{{ class.class_Code}}</span>
+              </div>
+            </td>
+            <td>{{data.stu_Email}}</td>
+            <td>{{data.createdDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="text-center">
+              <button class="btn btn-success" title="Chi tiết hình" type="button" data-toggle="modal" data-target="#myModal">
+                <i class="fa fa-eye"></i>
+              </button>
+              <!-- Modal -->
+              <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <div>
+                        <img class="form-control"  src="{{data.identity_Card}}" style="width:100%; height: auto;" >
+                      </div>
+                    </div>
+                   </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <a class="btn btn-secondary" href="{{data.stu_Facebook}}" target="_blank">Xem</a>
+            </td>
+            <td>
+              <span *ngIf="data.status === 1" class="badge badge-warning">Chưa duyệt</span>
+              <span *ngIf="data.status === 2" class="badge badge-success">Đang học</span>
+              <span *ngIf="data.status === 3" class="badge badge-secondary">Đã nghỉ</span>
+              <span *ngIf="data.status === 4" class="badge badge-secondary">Đã duyệt</span>
+            </td>
+            <td>
+              <button class="btn btn-info btn-sm" title="Chi tiết học viên" (click)="modalDetail.showModal()">
+                <i class="fa fa-eye"></i>
+              </button>
+              <button class="btn btn-warning btn-sm" title="Sửa" (click)="modalUpdate.showModal()">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button class="btn btn-danger btn-sm" title="Xóa">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+            <app-admin-student-update #modalUpdate [student]="data"  (itemCreated)="itemCreated($event)"></app-admin-student-update>
+            <app-admin-student-detail #modalDetail [student]="data" (itemCreated)="itemCreated($event)"></app-admin-student-detail>
+          </tr>
+        </tbody>
+      </nz-table>
+      <!-- <nz-dropdown-menu #menu="nzDropdownMenu">
+        <div class="ant-table-filter-dropdown">
+          <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+              Search
+            </button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+          </div>
+        </div>
+      </nz-dropdown-menu> -->
+    </div>
+  </div>
+
+  <app-admin-student-add #modal (itemCreated)="itemCreated($event)"></app-admin-student-add>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

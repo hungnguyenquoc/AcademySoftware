@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ClassStudy } from '../_models/classStudy';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Option } from '../_models/option';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,14 +25,22 @@ export class ClassStudyService {
   getClass(id): Observable<ClassStudy> {
     return this.http.get<ClassStudy>(this.api.url.classes + '/' + id, httpOptions);
   }
+  getOption(): Observable<Option[]> {
+    return this.http.get<Option[]>(this.api.url.classes + '/' + 'getalloptions', httpOptions);
+  }
   addClass(model: any) {
     const body = JSON.stringify(model);
     return this.http.post(this.api.url.classes + '/', body , httpOptions).pipe(map(res => res));
   }
+  // importExcel(user: number, file: FormData): Observable<ListStudentResult> {
+  //   return this._http.post<ListStudentResult>(`${this.baseapi.url.file}/ImportExcel/${user}`, file);
+  // }
+
   //
-  createClass(optionId, model: any) {
+  createClass(optionId: number, model: any): Observable<ClassStudy[]> {
+    return this.http.post<ClassStudy[]>(`${this.api.url.classes}?${optionId = 1}`, model, httpOptions);
     // let params = new HttpParams().set('optionId', optionId);
-    return this.http.post(`${this.api.url.classes}/${optionId}`, model, httpOptions);
+    // return this.http.post(`${this.api.url.classes}/${optionId}`, model, httpOptions);
   }
   updateClass(id, model: any) {
     return this.http.put(this.api.url.classes + '/' + id, model  , httpOptions);
