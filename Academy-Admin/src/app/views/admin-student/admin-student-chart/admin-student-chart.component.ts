@@ -56,9 +56,9 @@ export class AdminStudentChartComponent implements OnInit {
         console.log(res['page']);
         this.temp = res['page'];
         console.log(this.temp.total);
-        // console.log(res['data']);
+        console.log(res['data']);
         const localChartData = this.getChartData(res);
-        // console.log(localChartData.map(x => x[0]));
+        console.log(localChartData.map(x => x[0]));
         // this.barChartLabels = localChartData.map( x => x[0]).reverse();
         // this.barChartData = [{'data': localChartData.map(x => x[1]), 'label': 'Sales'}];
       }
